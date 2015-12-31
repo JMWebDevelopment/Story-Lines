@@ -1,9 +1,9 @@
 <?php 
 /*
-* Plugin Name: Read More About
-* Plugin URI: http://www.jacobmartella.com/read-more-about/
-* Description: Allows users to add links in a story using a shortcode to provide addition reading material about a subject. Works great for large topics that can't all be explained in one post.
-* Version: 1.1
+* Plugin Name: Story Lines
+* Plugin URI: http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
+* Description: Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
+* Version: 1.0
 * Author: Jacob Martella
 * Author URI: http://www.jacobmartella.com
 * License: GPLv3
@@ -11,11 +11,11 @@
 /**
 * Set up the plugin when the user activates the plugin. Adds the breaking news custom post type the text domain for translations.
 */
-$read_more_about_plugin_path = plugin_dir_path( __FILE__ );
-define('READ_MORE_ABOUT_PATH', $read_more_about_plugin_path);
+$story_lines_plugin_path = plugin_dir_path( __FILE__ );
+define('STORY_LINE_PATH', $story_lines_plugin_path);
 
 //* Load the custom fields
-include_once(READ_MORE_ABOUT_PATH . 'admin/read-more-about-admin.php');
+include_once(STORY_LINE_PATH . 'admin/story-lines-admin.php');
 
 //* Load the text domain
 load_plugin_textdomain('read-more-about', false, basename( dirname( __FILE__ ) ) . '/languages' );
@@ -23,66 +23,59 @@ load_plugin_textdomain('read-more-about', false, basename( dirname( __FILE__ ) )
 /**
 * Loads the styles for the read more about section on the front end
 */
-function read_more_about_styles() {
-	wp_enqueue_style('read-more-about-style', plugin_dir_url(__FILE__) . 'css/read-more-about.css' );
-	wp_enqueue_style('lato', '//fonts.googleapis.com/css?family=Lato:100,300,400,700');
-  	wp_enqueue_style('oswald', '//fonts.googleapis.com/css?family=Oswald:400,700,300');
+function story_lines_styles() {
+	wp_enqueue_style('story-lines-style', plugin_dir_url(__FILE__) . 'css/story-lines.css' );
+	wp_enqueue_style( 'roboto', '//fonts.googleapis.com/css?family=Roboto:400,300,100,700', array(), '', 'all' );
 }
-add_action('wp_enqueue_scripts', 'read_more_about_styles' );
+add_action('wp_enqueue_scripts', 'story_lines_styles' );
 
 /**
 * Loads and prints the styles for the breaking news custom post type
 */
-function read_more_about_admin_style() {
+function story_lines_admin_style() {
 	global $typenow;
 	if ($typenow == 'post') {
-		wp_enqueue_style('read_more_about_admin_styles', plugin_dir_url(__FILE__) . 'css/read-more-about-admin.css');
+		wp_enqueue_style('story_lines_admin_styles', plugin_dir_url(__FILE__) . 'css/story-lines-admin.css');
 	}
 }
-add_action('admin_print_styles', 'read_more_about_admin_style');
+add_action('admin_print_styles', 'story_lines_admin_style');
 
 /**
 * Loads the script for the breaking news custom post type
 */
-function read_more_about_admin_scripts() {
+function story_lines_admin_scripts() {
 	global $typenow;
 	if ($typenow == 'post') {
-		wp_enqueue_script('read_more_about_admin_script', plugin_dir_url(__FILE__) . 'js/read-more-about-admin.js');
+		wp_enqueue_script('story_lines_admin_script', plugin_dir_url(__FILE__) . 'js/story-lines-admin.js');
 	}
 }
-add_action('admin_enqueue_scripts', 'read_more_about_admin_scripts');
+add_action('admin_enqueue_scripts', 'story_lines_admin_scripts');
 
 //* Register and create the shortcode to display the section
-function read_more_about_register_shortcode() {
-	add_shortcode('read-more', 'read_more_about_shortcode');
+function story_lines_register_shortcode() {
+	add_shortcode('story-lines', 'story_lines_shortcode');
 }
-add_action('init', 'read_more_about_register_shortcode');
-function read_more_about_shortcode($atts) {
+add_action('init', 'story_lines_register_shortcode');
+function story_lines_shortcode($atts) {
 	extract(shortcode_atts(array(
-		'title' => __('Read More', 'read-more-about'),
-		'float' => 'left'
 	), $atts));
 	$the_post_id = get_the_ID();
 
-	$fields = get_post_meta($the_post_id, 'read_more_links', true);
+	if (get_post_meta($the_post_id, 'story_lines_title', true)) { $title = get_post_meta($the_post_id, 'story_lines_title', true); } else { $title = __('Story Lines', 'story-lines'); }
+	if (get_post_meta($the_post_id, 'story_lines_size', true)) { $size = 'width: ' . get_post_meta($the_post_id, 'story_lines_size', true) . '%;'; } else { $size = 'width: 25%;'; }
+	if (get_post_meta($the_post_id, 'story_lines_float', true)) { $float =  get_post_meta($the_post_id, 'story_lines_float', true); } else { $float = 'left'; }
+	if (get_post_meta($the_post_id, 'story_lines_highlights', true)) { $highlights = get_post_meta($the_post_id, 'story_lines_highlights', true); } else { $highlights = ''; }
 
 	$html = '';
 
-	if ($fields) {
-		$html .= '<aside class="read-more-about ' . $float . '">';
+	if ($highlights) {
+		$html .= '<aside class="story-lines ' . $float . '" style="' . $size . '">';
 		$html .= '<h2 class="title">' . $title . '</h2>';
-		foreach ($fields as $field) {
-			$html .= '<div class="story">';
-			if($field['read_more_about_in_ex'] == 'internal') {
-				if (has_post_thumbnail($field['read_more_about_internal_link'])){
-					$html .= '<div class="photo"><a href="' . get_the_permalink($field['read_more_about_internal_link']) . '">' . get_the_post_thumbnail($field['read_more_about_internal_link'], 'read-more') . '</a></div>';
-				}
-				$html .= '<h3 class="story-title"><a href="' . get_the_permalink($field['read_more_about_internal_link']) . '">' . get_the_title($field['read_more_about_internal_link']) . '</a></h3>';
-			} else {
-				$html .= '<h3 class="story-title"><a href="' . $field['read_more_about_link'] . '" target="_blank">' . $field['read_more_about_external_title'] . '</a></h3>';
-			}
-			$html .= '</div>';
+		$html .= '<ul>';
+		foreach ($highlights as $highlight) {
+			$html .= '<li>' . $highlight['story_lines_highlight'];
 		}
+		$html .= '</ul>';
 		$html .= '</aside>';
 	}
 
@@ -90,17 +83,17 @@ function read_more_about_shortcode($atts) {
 }
 
 //* Add a button to the TinyMCE Editor to make it easier to add the shortcode
-add_action( 'init', 'read_more_about_buttons' );
-function read_more_about_buttons() {
-    add_filter( 'mce_external_plugins', 'read_more_about_add_buttons' );
-    add_filter( 'mce_buttons', 'read_more_about_register_buttons' );
+add_action( 'init', 'story_lines_buttons' );
+function story_lines_buttons() {
+    add_filter( 'mce_external_plugins', 'story_lines_add_buttons' );
+    add_filter( 'mce_buttons', 'story_lines_register_buttons' );
 }
-function read_more_about_add_buttons( $plugin_array ) {
-    $plugin_array['read_more_about'] = plugin_dir_url(__FILE__) . 'js/read-more-about-admin-button.js';
+function story_lines_add_buttons( $plugin_array ) {
+    $plugin_array['story_lines'] = plugin_dir_url(__FILE__) . 'js/story-lines-admin-button.js';
     return $plugin_array;
 }
-function read_more_about_register_buttons( $buttons ) {
-    array_push( $buttons, 'read_more_about' );
+function story_lines_register_buttons( $buttons ) {
+    array_push( $buttons, 'story_lines' );
     return $buttons;
 }
 ?>

@@ -13,15 +13,4 @@ jQuery(document).ready(function( $ ){
 		return false;
 	});
 
-	$(".read_more_about_in_ex").change(function() { 
-        if ($(this).val() == "internal") {
-            $(this).parents('section').find(".internal-link").show();
-            $(this).parents('section').find(".external-link").hide();
-            $(this).parents('section').find(".external-title").hide();
-        } else {
-        	$(this).parents('section').find(".internal-link").hide();
-            $(this).parents('section').find(".external-link").show();
-            $(this).parents('section').find(".external-title").show();
-        }
-    });
 });

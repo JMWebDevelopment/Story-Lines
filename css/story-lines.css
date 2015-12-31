@@ -1,55 +1,44 @@
 /*
-* The stylesheet for the Read More About section.
+* The stylesheet for the Story Lines section.
 *
 * Author: Jacob Martella
-* Package: Read More About
-* Version: 1.1
+* Package: Story Lines
+* Version: 1.0
 */
-.read-more-about {
-	width: 240px;
+.story-lines {
 	position: relative;
 	margin: 10px 0px;
-	padding: 10px 5px;
-	text-align: center;
-	background-color: #FFFFFF;
-	-webkit-box-shadow: 0px 0px 5px 0px rgba(97,97,97,0.26);
-	-moz-box-shadow: 0px 0px 5px 0px rgba(97,97,97,0.26);
-	box-shadow: 0px 0px 5px 0px rgba(97,97,97,0.26);
+	background-color: #252525;
+	padding-bottom: 5px;
 }
-.left {
+.story-lines.left {
 	float: left;
 	margin-right: 10px;
 }
-.center {
+.story-lines.center {
 	margin: auto;
-	width: 100%;
+	clear: both;
 }
-.right {
+.story-lines.right {
 	float: right;
 	margin-left: 10px;
 }
-.read-more-about .title {
-	color: #000000;
-	font-family: 'Lato', sans-serif;
-	font-weight: 400;
-	font-size: 28px;
-	background-color: #FFFFFF;
+.story-lines .title {
+	color: #FFFFFF;
+	background-color: #000000;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 24px;
 	margin: 0px;
 	margin-bottom: 15px;
+	text-align: center;
+	text-transform: uppercase;
 }
-.photo {
-	width: 220px;
-	height: 110px;
-	margin: auto;
-	overflow: hidden;
+.story-lines li {
+	color: #FFFFFF;
 }
-h3.story-title {
-	line-height: 1em !important;
-	margin-top: 5px;
-}
-.story-title a {
-	font-size: 20px;
-	color: #000000 !important;
-	font-family: 'Oswald', sans-serif;
-	font-weight: 400;
+@media only screen and (max-width: 500px) {
+	.story-lines {
+		width: 100% !important;
+	}
 }
