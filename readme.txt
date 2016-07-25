@@ -2,8 +2,8 @@
 Contributors: ArenaPigskin
 Tags: story lines, story highlights, shortcodes, custom meta panel
 Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 1.0
+Tested up to: 4.5
+Stable tag: 1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -22,5 +22,13 @@ One of the common features of online news stories is a section that displays two
 2. The Story Lines section of the post editor.
 
 == Changelog ==
+= 1.1 =
+- Allowed users to reorder the story lines.
+- Added users the ability to customize the colors of the story lines section of the post.
+- Tested with WordPress 4.5
+
+= 1.0.1 =
+- Fixed: Issue with float option not saving correctly.
+
 = 1.0 =
 - Initial Release

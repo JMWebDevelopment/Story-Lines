@@ -3,7 +3,7 @@
 *
 * Author: Jacob Martella
 * Package: Story Lines
-* Version: 1.0
+* Version: 1.1
 */
 #story-lines-meta label {
 	margin-right: 5px;
@@ -14,10 +14,15 @@
 .story-lines-wrap {
 	margin-bottom: 10px;
 }
-.link-fields {
+.story-lines-link-fields {
 	border-bottom: 1px solid #e5e5e5;
 	padding-bottom: 15px;
+	cursor: move;
 }
 #story_lines_highlight {
 	width: 100%;
+}
+
+.wp-color-result {
+	margin-bottom: -3px;
 }

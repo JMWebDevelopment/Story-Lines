@@ -3,7 +3,7 @@
 * Plugin Name: Story Lines
 * Plugin URI: http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
 * Description: Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
-* Version: 1.0
+* Version: 1.1
 * Author: Jacob Martella
 * Author URI: http://www.jacobmartella.com
 * License: GPLv3
@@ -62,18 +62,22 @@ function story_lines_shortcode($atts) {
 	$the_post_id = get_the_ID();
 
 	if (get_post_meta($the_post_id, 'story_lines_title', true)) { $title = get_post_meta($the_post_id, 'story_lines_title', true); } else { $title = __('Story Lines', 'story-lines'); }
-	if (get_post_meta($the_post_id, 'story_lines_size', true)) { $size = 'width: ' . get_post_meta($the_post_id, 'story_lines_size', true) . '%;'; } else { $size = 'width: 25%;'; }
-	if (get_post_meta($the_post_id, 'story_lines_float', true)) { $float =  get_post_meta($the_post_id, 'story_lines_float', true); } else { $float = 'left'; }
+	if (get_post_meta($the_post_id, 'story_lines_size', true)) { $size = 'width: ' . esc_attr(get_post_meta($the_post_id, 'story_lines_size', true)) . '%;'; } else { $size = 'width: 25%;'; }
+	if (get_post_meta($the_post_id, 'story_lines_float', true)) { $float =  esc_attr(get_post_meta($the_post_id, 'story_lines_float', true)); } else { $float = 'left'; }
 	if (get_post_meta($the_post_id, 'story_lines_highlights', true)) { $highlights = get_post_meta($the_post_id, 'story_lines_highlights', true); } else { $highlights = ''; }
+	if (get_post_meta($the_post_id, 'story_lines_title_background', true)) { $title_bg_color = 'background-color: ' . esc_attr(get_post_meta($the_post_id, 'story_lines_title_background', true)) . ';'; } else { $title_bg_color = ''; }
+	if (get_post_meta($the_post_id, 'story_lines_main_background', true)) { $main_bg_color = 'background-color: ' . esc_attr(get_post_meta($the_post_id, 'story_lines_main_background', true)) . ';'; } else { $main_bg_color = ''; }
+	if (get_post_meta($the_post_id, 'story_lines_title_color', true)) { $title_color = 'color: ' . esc_attr(get_post_meta($the_post_id, 'story_lines_title_color', true)) . ';'; } else { $title_color = ''; }
+	if (get_post_meta($the_post_id, 'story_lines_main_color', true)) { $main_color = 'color: ' . esc_attr(get_post_meta($the_post_id, 'story_lines_main_color', true)) . ';'; } else { $main_color = ''; }
 
 	$html = '';
 
 	if ($highlights) {
-		$html .= '<aside class="story-lines ' . $float . '" style="' . $size . '">';
-		$html .= '<h2 class="title">' . $title . '</h2>';
+		$html .= '<aside class="story-lines ' . $float . '" style="' . $size . $main_bg_color . '">';
+		$html .= '<h2 class="title" style="' . $title_bg_color . $title_color . '">' . $title . '</h2>';
 		$html .= '<ul>';
 		foreach ($highlights as $highlight) {
-			$html .= '<li>' . $highlight['story_lines_highlight'];
+			$html .= '<li style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</li>';
 		}
 		$html .= '</ul>';
 		$html .= '</aside>';
@@ -96,4 +100,7 @@ function story_lines_register_buttons( $buttons ) {
     array_push( $buttons, 'story_lines' );
     return $buttons;
 }
+
+//* Load the Widget
+include_once(STORY_LINE_PATH . 'story-lines-widget.php');
 ?>
