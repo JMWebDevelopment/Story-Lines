@@ -77,7 +77,11 @@ function story_lines_shortcode($atts) {
 		$html .= '<h2 class="title" style="' . $title_bg_color . $title_color . '">' . $title . '</h2>';
 		$html .= '<ul>';
 		foreach ($highlights as $highlight) {
-			$html .= '<li style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</li>';
+			if ( $highlight[ 'story_lines_anchor_id' ] ) {
+				$html .= '<li><a href="#' . $highlight[ 'story_lines_anchor_id' ] . '" style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</a></li>';
+			} else {
+				$html .= '<li style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</li>';
+			}
 		}
 		$html .= '</ul>';
 		$html .= '</aside>';
@@ -103,4 +107,7 @@ function story_lines_register_buttons( $buttons ) {
 
 //* Load the Widget
 include_once(STORY_LINE_PATH . 'story-lines-widget.php');
+
+//* Load the Contextual Help
+include_once(STORY_LINE_PATH . 'admin/story-lines-help.php');
 ?>

@@ -93,6 +93,15 @@ function story_lines_meta_box_display() {
 				echo '<label for="story_lines_highlight">' . __('Story Line:', 'story-lines') . '</label><br />';
 				echo '<input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="' . esc_attr($highlight['story_lines_highlight']) . '" />';
 			echo '</p>';
+			echo '<p>';
+			if ( isset( $highlight['story_lines_anchor_id'] ) ) {
+				$anchor = $highlight['story_lines_anchor_id'];
+			} else {
+				$anchor = '';
+			}
+			echo '<label for="story_lines_anchor_id">' . __('Anchor ID:', 'story-lines') . '</label><br />';
+			echo '<input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="' . esc_attr($anchor) . '" />';
+			echo '</p>';
 			echo '<a class="button story-lines-remove-row" href="#">' . __('Remove Line', 'story-lines') . '</a>';
 		echo '</section>';
 
@@ -106,7 +115,12 @@ function story_lines_meta_box_display() {
 		echo '<input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" />';
 		echo '</p>';
 
-			echo '<a class="button story-lines-remove-row" href="#">' . __('Remove Line', 'story-lines') . '</a>';
+		echo '<p>';
+		echo '<label for="story_lines_anchor_id">' . __('Anchor ID:', 'story-lines') . '</label><br />';
+		echo '<input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" />';
+		echo '</p>';
+
+		echo '<a class="button story-lines-remove-row" href="#">' . __('Remove Line', 'story-lines') . '</a>';
 		
 		echo '</section>';
 	}
@@ -114,11 +128,16 @@ function story_lines_meta_box_display() {
 	//* Set up a hidden group of fields for the jQuery to grab
 	echo '<section class="story-lines-empty-row screen-reader-text">';
 	echo '<p>';
-	echo '<label for="story_lines_highlight">' . __('Story Line', 'story-lines') . '</label><br />';
+	echo '<label for="story_lines_highlight">' . __('Story Line:', 'story-lines') . '</label><br />';
 	echo '<input class="new-field" type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" disabled="disabled" />';
 	echo '</p>';
+
+	echo '<p>';
+	echo '<label for="story_lines_anchor_id">' . __('Anchor ID:', 'story-lines') . '</label><br />';
+	echo '<input class="new-field" type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" disabled="disabled" />';
+	echo '</p>';
 		  
-		echo '<a class="button story-lines-remove-row" href="#">' . __('Remove Line', 'story-lines') . '</a>';
+	echo '<a class="button story-lines-remove-row" href="#">' . __('Remove Line', 'story-lines') . '</a>';
 	echo '</section>';
 	
 	echo '</div>';
@@ -152,6 +171,7 @@ function story_lines_meta_box_save($post_id) {
 	$new = array();
 
 	$lines = $_POST['story_lines_highlight'];
+	$anchor_ids = $_POST['story_lines_anchor_id'];
 	
 	$num = count($lines);
 
@@ -197,9 +217,12 @@ function story_lines_meta_box_save($post_id) {
 	
 	for ( $i = 0; $i < $num; $i++ ) {
 
-			if(isset($lines[$i])) {
-        		$new[$i]['story_lines_highlight'] = sanitize_text_field(wp_filter_nohtml_kses($lines[$i]));
-    		}
+		if(isset($lines[$i])) {
+        	$new[$i]['story_lines_highlight'] = sanitize_text_field(wp_filter_nohtml_kses($lines[$i]));
+    	}
+		if(isset($anchor_ids[$i])) {
+			$new[$i]['story_lines_anchor_id'] = sanitize_text_field(wp_filter_nohtml_kses($anchor_ids[$i]));
+		}
 
 		}
 

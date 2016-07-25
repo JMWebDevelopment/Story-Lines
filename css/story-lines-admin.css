@@ -19,7 +19,7 @@
 	padding-bottom: 15px;
 	cursor: move;
 }
-#story_lines_highlight {
+#story_lines_highlight, #story_lines_anchor_id {
 	width: 100%;
 }
 
