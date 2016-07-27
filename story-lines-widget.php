@@ -1,14 +1,12 @@
 <?php
 /**
- * story-lines-admin.php
+ * story-lines-widget.php
  *
- * Creates the custom fields for the post admin area
- *
- * The code for the repeatable fields comes from Helen Housandi and can be found here: https://gist.github.com/helenhousandi/1593065. Many thanks for this code.
+ * Creates the widget to show the story lines in the sidebar of a single post
  *
  * @author Jacob Martella
  * @package Read More About
- * @version 1.1
+ * @version 1.2
  * @since 1.2
  */
 class Story_Lines_Widget extends WP_Widget {
@@ -37,16 +35,20 @@ class Story_Lines_Widget extends WP_Widget {
 
 				if (get_post_meta(get_the_ID(), 'story_lines_title', true)) { $title = get_post_meta(get_the_ID(), 'story_lines_title', true); } else { $title = __('Story Lines', 'story-lines'); }
 
-				echo $instance[ 'before_widget' ];
+				echo $before_widget;
 
-				echo $instance[ 'before_title' ] . $title . $instance[ 'after_title'];
+				echo $before_title . $title . $after_title;
 				echo '<ul>';
 				foreach ($highlights as $highlight) {
-					echo '<li>' . $highlight['story_lines_highlight'] . '</li>';
+					if ( isset( $highlight[ 'story_lines_anchor_id' ] ) ) {
+						echo '<li><a href="#' . $highlight[ 'story_lines_anchor_id' ] . '">' . $highlight['story_lines_highlight'] . '</a></li>';
+					} else {
+						echo '<li>' . $highlight['story_lines_highlight'] . '</li>';
+					}
 				}
 				echo '</ul>';
 
-				echo $instance[ 'after_widget' ];
+				echo $after_widget;
 
 			}
 

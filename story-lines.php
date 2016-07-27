@@ -80,7 +80,7 @@ function story_lines_shortcode($atts) {
 		$html .= '<h2 class="title" style="' . $title_bg_color . $title_color . '">' . $title . '</h2>';
 		$html .= '<ul>';
 		foreach ($highlights as $highlight) {
-			if ( $highlight[ 'story_lines_anchor_id' ] ) {
+			if ( isset( $highlight[ 'story_lines_anchor_id' ] ) ) {
 				$html .= '<li><a href="#' . $highlight[ 'story_lines_anchor_id' ] . '" style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</a></li>';
 			} else {
 				$html .= '<li style="' . $main_color . '">' . $highlight['story_lines_highlight'] . '</li>';
