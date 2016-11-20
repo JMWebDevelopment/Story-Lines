@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Story Lines\n"
-"POT-Creation-Date: 2016-07-26 21:56-0500\n"
-"PO-Revision-Date: 2016-07-26 21:57-0500\n"
+"POT-Creation-Date: 2016-11-19 20:41-0600\n"
+"PO-Revision-Date: 2016-11-19 20:41-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: story-lines.php\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -50,7 +50,7 @@ msgid "Color for the title text"
 msgstr "Цвет текста заголовка"
 
 #: admin/story-lines-admin.php:82
-msgid " Color for text of the main section"
+msgid "Color for text of the main section"
 msgstr "Цвет для текста основного раздела"
 
 #: admin/story-lines-admin.php:93 admin/story-lines-admin.php:114
@@ -92,12 +92,12 @@ msgstr ""
 "span id = \"ваш id\"&gt;). Затем добавьте id вы дали секции соответствующей "
 "сюжетной линии."
 
-#: story-lines-widget.php:18
+#: story-lines-widget.php:22
 msgid "Story Lines Widget"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: story-lines-widget.php:36 story-lines.php:64
+#: story-lines-widget.php:48 story-lines.php:67
 msgid "Story Lines"
 msgstr ""
 
@@ -120,3 +120,6 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.jacobmartella.com"
 msgstr ""
+
+#~ msgid " Color for text of the main section"
+#~ msgstr "Цвет для текста основного раздела"
