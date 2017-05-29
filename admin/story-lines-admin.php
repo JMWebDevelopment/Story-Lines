@@ -39,19 +39,20 @@ function story_lines_meta_box_display() {
   
 	echo '<div id="story-lines-repeatable-fieldset-one" width="100%">';
 
-	echo '<p>';
-	echo '<label for="story_lines_title">' . __( 'Title:', 'story-lines' ) . '</label>';
-	echo '<input type="text" name="story_lines_title" id="story_lines_title" value="' . esc_attr( $title ) . '" />';
-	echo '</p>';
+	echo '<table class="story-lines-options">';
+	echo '<tr>';
+	echo '<td><label for="story_lines_title">' . __( 'Title:', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="text" name="story_lines_title" id="story_lines_title" value="' . esc_attr( $title ) . '" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_size">' . __( 'Size (as a percentage): ', 'story-lines' ) . '</label>';
-	echo '<input type="number" name="story_lines_size" id="story_lines_size" value="' . esc_attr( $size ) . '" max="100" min="1" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_size">' . __( 'Size (as a percentage): ', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="number" name="story_lines_size" id="story_lines_size" value="' . esc_attr( $size ) . '" max="100" min="1" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_float">' . __( 'Float:', 'story-lines' ) . '</label>';
-	echo '<select name="story_lines_float" id="story_lines_float">';
+	echo '<tr>';
+	echo '<td><label for="story_lines_float">' . __( 'Float:', 'story-lines' ) . '</label></td>';
+	echo '<td><select name="story_lines_float" id="story_lines_float">';
 	foreach ( $float_array as $key => $name ) {
 		if ( $key == $float ) {
 			$selected = 'selected="selected"';
@@ -60,85 +61,86 @@ function story_lines_meta_box_display() {
 		}
 		echo '<option value="' . esc_attr( $key ) . '" ' . $selected . '>' . $name . '</option>';
 	}
-	echo '</select>';
-	echo '</p>';
+	echo '</select></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_title_background">' . __( 'Background Color for title section', 'story-lines' ) . '</label>';
-	echo '<input type="text" name="story_lines_title_background" id="story_lines_title_background" value="' . $title_bg_color .'" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_title_background">' . __( 'Background Color for title section', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="text" name="story_lines_title_background" id="story_lines_title_background" value="' . $title_bg_color .'" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_main_background">' . __( 'Background Color for main section', 'story-lines' ) . '</label>';
-	echo '<input type="text" name="story_lines_main_background" id="story_lines_main_background" value="' . $main_bg_color .'" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_main_background">' . __( 'Background Color for main section', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="text" name="story_lines_main_background" id="story_lines_main_background" value="' . $main_bg_color .'" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_title_color">' . __( 'Color for the title text', 'story-lines' ) . '</label>';
-	echo '<input type="text" name="story_lines_title_color" id="story_lines_title_color" value="' . $title_color .'" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_title_color">' . __( 'Color for the title text', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="text" name="story_lines_title_color" id="story_lines_title_color" value="' . $title_color .'" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_main_color">' . __( 'Color for text of the main section', 'story-lines' ) . '</label>';
-	echo '<input type="text" name="story_lines_main_color" id="story_lines_main_color" value="' . $main_color .'" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_main_color">' . __( 'Color for text of the main section', 'story-lines' ) . '</label></td>';
+	echo '<td><input type="text" name="story_lines_main_color" id="story_lines_main_color" value="' . $main_color .'" /></td>';
+	echo '</tr>';
+    echo '</table>';
 	
 	//* Check for fields already filled out
 	if ( $highlights ) {
 	
 		//* Loop through each link the user has already entered
 		foreach ( $highlights as $highlight ) {
-		echo '<section class="story-lines-link-fields">';
-			echo '<p>';
-				echo '<label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label><br />';
-				echo '<input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="' . esc_attr( $highlight[ 'story_lines_highlight' ] ) . '" />';
-			echo '</p>';
-			echo '<p>';
+		echo '<table class="story-lines-link-fields">';
+			echo '<tr>';
+				echo '<td><label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label></td>';
+				echo '<td><input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="' . esc_attr( $highlight[ 'story_lines_highlight' ] ) . '" /></td>';
+			echo '</tr>';
+			echo '<tr>';
 			if ( isset( $highlight[ 'story_lines_anchor_id' ] ) ) {
 				$anchor = $highlight[ 'story_lines_anchor_id' ];
 			} else {
 				$anchor = '';
 			}
-			echo '<label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label><br />';
-			echo '<input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="' . esc_attr( $anchor ) . '" />';
-			echo '</p>';
-			echo '<a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a>';
-		echo '</section>';
+			echo '<td><label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label></td>';
+			echo '<td><input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="' . esc_attr( $anchor ) . '" /></td>';
+			echo '</tr>';
+			echo '<tr><td><a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a></td></tr>';
+		echo '</table>';
 
 		} //* End foreach
 
 	} else {
 	//* Show a blank set of fields if there are no fields filled in
-		echo '<section class="story-lines-link-fields">';
-		echo '<p>';
-		echo '<label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label><br />';
-		echo '<input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" />';
-		echo '</p>';
+		echo '<table class="story-lines-link-fields">';
+		echo '<tr>';
+		echo '<td><label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label></td>';
+		echo '<td><input type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" /></td>';
+		echo '</tr>';
 
-		echo '<p>';
-		echo '<label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label><br />';
-		echo '<input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" />';
-		echo '</p>';
+		echo '<tr>';
+		echo '<td><label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label><br /></td>';
+		echo '<td><input type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" /></td>';
+		echo '</tr>';
 
-		echo '<a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a>';
+		echo '<tr><td><a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a></td></tr>';
 		
-		echo '</section>';
+		echo '</table>';
 	}
 	
 	//* Set up a hidden group of fields for the jQuery to grab
-	echo '<section class="story-lines-empty-row screen-reader-text">';
-	echo '<p>';
-	echo '<label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label><br />';
-	echo '<input class="new-field" type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" disabled="disabled" />';
-	echo '</p>';
+	echo '<table class="story-lines-empty-row screen-reader-text">';
+	echo '<tr>';
+	echo '<td><label for="story_lines_highlight">' . __( 'Story Line:', 'story-lines' ) . '</label></td>';
+	echo '<td><input class="new-field" type="text" name="story_lines_highlight[]" id="story_lines_highlight" value="" disabled="disabled" /></td>';
+	echo '</tr>';
 
-	echo '<p>';
-	echo '<label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label><br />';
-	echo '<input class="new-field" type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" disabled="disabled" />';
-	echo '</p>';
+	echo '<tr>';
+	echo '<td><label for="story_lines_anchor_id">' . __( 'Anchor ID:', 'story-lines' ) . '</label></td>';
+	echo '<td><input class="new-field" type="text" name="story_lines_anchor_id[]" id="story_lines_anchor_id" value="" disabled="disabled" /></td>';
+	echo '</tr>';
 		  
-	echo '<a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a>';
-	echo '</section>';
+	echo '<tr><td><a class="button story-lines-remove-row" href="#">' . __( 'Remove Line', 'story-lines' ) . '</a></td></tr>';
+	echo '</table>';
 	
 	echo '</div>';
 	echo '<p><a id="story-lines-add-row" class="button" href="#">' . __( 'Add Story Line', 'story-lines' ) . '</a></p>';

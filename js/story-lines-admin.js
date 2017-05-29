@@ -9,7 +9,7 @@ jQuery(document).ready(function( $ ){
 	}) ;
   	
 	$( '.story-lines-remove-row' ).on( 'click', function() {
-		$( this ).parents( 'section' ).remove();
+		$( this ).parents( 'table' ).remove();
 		return false;
 	} );
 
@@ -17,7 +17,7 @@ jQuery(document).ready(function( $ ){
 		opacity: 0.6,
 		revert: true,
 		cursor: 'move',
-		items: 'section'
+		items: 'table'
 	});
 
 	jQuery( '#story_lines_title_background' ).wpColorPicker();
