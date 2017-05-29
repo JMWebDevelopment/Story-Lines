@@ -34,6 +34,9 @@
 	text-align: center;
 	text-transform: uppercase;
 }
+.story-lines ul {
+	padding: 0 8px;
+}
 .story-lines li {
 	color: #FFFFFF;
 }
