@@ -3,7 +3,7 @@ Contributors: ArenaPigskin
 Tags: story lines, story highlights, shortcodes, custom meta panel
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
