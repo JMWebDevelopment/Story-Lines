@@ -21,7 +21,7 @@ add_action( 'admin_init', 'story_lines_add_meta_boxes' );
 
 //* Add the meta box
 function story_lines_add_meta_boxes() {
-	add_meta_box( 'story-lines-meta', __( 'Add Story Lines', 'story-lines' ) , 'story_lines_meta_box_display', 'post', 'normal', 'default' );
+	add_meta_box( 'story-lines-meta', __( 'Add Story Lines', 'story-lines' ) , 'story_lines_meta_box_display', array( 'post', 'page' ), 'normal', 'default' );
 }
 //* Create the meta box
 function story_lines_meta_box_display() {
