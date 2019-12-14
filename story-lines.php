@@ -133,10 +133,10 @@ function story_lines_blocks_editor_scripts() {
 			'rest_url' => esc_url( rest_url() )
 		]);
 	// Enqueue optional editor only styles
-	/*wp_enqueue_style(
+	wp_enqueue_style(
 		'jm-live-blog-editor-css',
 		plugins_url( $editorStylePath, __FILE__)
-	);*/
+	);
 }
 // Hook scripts function into block editor hook
 add_action( 'enqueue_block_editor_assets', 'story_lines_blocks_editor_scripts' );

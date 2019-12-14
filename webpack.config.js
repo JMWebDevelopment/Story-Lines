@@ -51,10 +51,10 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
-      /*{
+      {
         test: /style\.s?css$/,
         use: blocksCSSPlugin.extract( extractConfig ),
-      },*/
+      },
       {
         test: /editor\.s?css$/,
         use: editBlocksCSSPlugin.extract( extractConfig ),

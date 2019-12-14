@@ -107,6 +107,19 @@ registerBlockType( 'story-lines/story-lines', {
             props.setAttributes( { story_lines_highlights } );
         };
 
+        let divStyle = {
+            backgroundColor: props.attributes.story_lines_main_background,
+        };
+
+        let h2Style = {
+            backgroundColor: props.attributes.story_lines_title_background,
+            color: props.attributes.story_lines_title_color,
+        };
+
+        let liStyle = {
+            color: props.attributes.story_lines_main_color,
+        };
+
         let highlightFields,
             highlightDisplay;
 
@@ -137,7 +150,7 @@ registerBlockType( 'story-lines/story-lines', {
             } );
 
             highlightDisplay = props.attributes.story_lines_highlights.map( ( highlight, index ) => {
-                return <li key={ index }><a href={ '#' + highlight.target }>{ highlight.text }</a></li>;
+                return <li key={ index } style={liStyle}><a href={ '#' + highlight.target } style={liStyle}>{ highlight.text }</a></li>;
             } );
         }
 
@@ -200,8 +213,8 @@ registerBlockType( 'story-lines/story-lines', {
                     >
                     </PanelColorSettings>
             </InspectorControls>,
-            <div key="2" className={ props.className }>
-                <h2>Block</h2>
+            <div key="2" className={ props.className } style={divStyle}>
+                <h2 style={h2Style}>Block</h2>
                 <ul>
                     { highlightDisplay }
                 </ul>
@@ -209,13 +222,27 @@ registerBlockType( 'story-lines/story-lines', {
         ];
     },
     save: ( props ) => {
+
+        let divStyle = {
+            backgroundColor: props.attributes.story_lines_main_background,
+        };
+
+        let h2Style = {
+            backgroundColor: props.attributes.story_lines_title_background,
+            color: props.attributes.story_lines_title_color,
+        };
+
+        let liStyle = {
+            color: props.attributes.story_lines_main_color,
+        };
+
         const highlightDisplay = props.attributes.story_lines_highlights.map( ( highlight, index ) => {
-            return <li key={ index }><a href={ '#' + highlight.target }>{ highlight.text }</a></li>;
+            return <li key={ index } style={liStyle}><a href={ '#' + highlight.target } style={liStyle}>{ highlight.text }</a></li>;
         } );
 
         return (
-            <div className={ props.className }>
-                <h2>Block</h2>
+            <div className={ props.className } style={divStyle}>
+                <h2 style={h2Style}>Block</h2>
                 <ul>
                     { highlightDisplay }
                 </ul>
