@@ -1,139 +1,170 @@
-/**
- * Block dependencies
- */
-//import './style.scss';
-//import './editor.scss';
+import './editor.scss';
+import './style.scss';
 
-/**
- * Internal block libraries
- */
-const { __ } = wp.i18n;
+const {
+    __,
+} = wp.i18n;
+const {
+    registerBlockType,
+} = wp.blocks;
+const {
+    Button,
+    IconButton,
+    PanelBody,
+    TextControl,
+    ColorPalette,
+    SelectControl
+} = wp.components;
 const {
     PanelColor,
     InspectorControls,
     URLInput,
-    PanelColorSettings
-} = wp.editor;// Import registerBlockType() from wp.blocks
-const { registerBlockType } = wp.blocks;
-const {
-    ColorPalette,
-    PanelBody,
-    TextControl,
-    SelectControl,
-    Button,
-    IconButton,
-} = wp.components;
+    PanelColorSettings,
+    AlignmentToolbar,
+    BlockControls,
+} = wp.editor;
 const {
     Fragment,
 } = wp.element;
 
-//this is where block control componants go! a-ha!
-
-registerBlockType(
-    'story-lines/story-lines', {
-        title: __('Story Lines'),
-        icon: 'dashicons-megaphone',
-        category: 'widgets',
-        keywords: [ __( 'story' ), __( 'description' ), __( 'highlights' ) ],
-
-        attributes: {
-            story_lines_title: {
-                type: 'string',
-                default: 'Story Lines',
-            },
-            story_lines_title_background: {
-                type: 'string',
-                default: '#000000',
-            },
-            story_lines_main_background: {
-                type: 'string',
-                default: '#252525',
-            },
-            story_lines_title_color: {
-                type: 'string',
-                default: '#FFFFFF',
-            },
-            story_lines_main_color: {
-                type: 'string',
-                default: '#FFFFFF',
-            },
-            story_lines_highlights: {
-                type: 'array',
-                default: [],
-            },
+/**
+ * Register: Repeater Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+registerBlockType( 'story-lines/story-lines', {
+    title: __( 'Story Lines' ),
+    icon: 'shield',
+    category: 'common',
+    attributes: {
+        story_lines_highlights: {
+            type: 'array',
+            default: [],
         },
-
-        getEditWrapperProps( { blockAlignment } ) {
-            if ( 'full' === blockAlignment || 'wide' === blockAlignment ) {
-                return { 'data-align': blockAlignment };
-            }
+        story_lines_title: {
+            type: 'string',
+            default: 'Story Lines',
         },
+        story_lines_title_background: {
+            type: 'string',
+            default: '#000000',
+        },
+        story_lines_main_background: {
+            type: 'string',
+            default: '#252525',
+        },
+        story_lines_title_color: {
+            type: 'string',
+            default: '#FFFFFF',
+        },
+        story_lines_main_color: {
+            type: 'string',
+            default: '#FFFFFF',
+        },
+        blockAlignment: {
+            type: 'string',
+            default: 'none'
+        }
+    },
+    keywords: [
+        __( 'story' ),
+        __( 'description' ),
+        __( 'highlights' ),
+    ],
+    edit: ( props ) => {
+        const handleAddLocation = () => {
+            const story_lines_highlights = [ ...props.attributes.story_lines_highlights ];
+            story_lines_highlights.push( {
+                text: '',
+                target: '',
+            } );
+            props.setAttributes( { story_lines_highlights } );
+        };
 
-        edit( { attributes, setAttributes, focus, setFocus, className } ) {
-            const { story_lines_title, story_lines_title_background, story_lines_main_background, story_lines_title_color, story_lines_main_color, story_lines_highlights  } = attributes;
+        const handleRemoveLocation = ( index ) => {
+            const story_lines_highlights = [ ...props.attributes.story_lines_highlights ];
+            story_lines_highlights.splice( index, 1 );
+            props.setAttributes( { story_lines_highlights } );
+        };
 
-            const handleAddLocation = () => {
-                const highlights = [ story_lines_highlights ];
-                highlights.push( {
-                    anchor: '',
-                    text: ''
-                } );
-                setAttributes( { story_lines_highlights: highlights } );
-            };
+        const handleTextChange = ( text, index ) => {
+            const story_lines_highlights = [ ...props.attributes.story_lines_highlights ];
+            story_lines_highlights[ index ].text = text;
+            props.setAttributes( { story_lines_highlights } );
+        };
 
-            const handleRemoveLocation = ( index ) => {
-                const highlights = [ story_lines_highlights ];
-                highlights.splice( index, 1 );
-                setAttributes( { story_lines_highlights: highlights } );
-            };
+        const handleTargetChange = ( target, index ) => {
+            const story_lines_highlights = [ ...props.attributes.story_lines_highlights ];
+            story_lines_highlights[ index ].target = target;
+            props.setAttributes( { story_lines_highlights } );
+        };
 
-            const handleTextChange = ( text, index ) => {
-                const highlights = [ story_lines_highlights ];
-                highlights[ index ].text = text;
-                setAttributes( { story_lines_highlights: highlights } );
-            };
+        let highlightFields,
+            highlightDisplay;
 
-            const handleAnchorChange = ( anchor, index ) => {
-                const highlights = [ story_lines_highlights ];
-                highlights[ index ].anchor = anchor;
-                setAttributes( { story_lines_highlights: highlights } );
-            };
+        if ( props.attributes.story_lines_highlights.length ) {
+            highlightFields = props.attributes.story_lines_highlights.map( ( location, index ) => {
+                return <Fragment key={ index }>
+                    <TextControl
+                        className="grf__location-address"
+                        placeholder=""
+                        label="Link Text"
+                        value={ props.attributes.story_lines_highlights[ index ].text }
+                        onChange={ ( text ) => handleTextChange( text, index ) }
+                    />
+                    <TextControl
+                        className="grf__location-address"
+                        placeholder=""
+                        label="Link Target"
+                        value={ props.attributes.story_lines_highlights[ index ].target }
+                        onChange={ ( target ) => handleTargetChange( target, index ) }
+                    />
+                    <IconButton
+                        className="grf__remove-location-address"
+                        icon="no-alt"
+                        label="Delete location"
+                        onClick={ () => handleRemoveLocation( index ) }
+                    />
+                </Fragment>;
+            } );
 
-            let highlightsFields;
+            highlightDisplay = props.attributes.story_lines_highlights.map( ( highlight, index ) => {
+                return <li key={ index }><a href={ '#' + highlight.target }>{ highlight.text }</a></li>;
+            } );
+        }
 
-            if ( story_lines_highlights.length ) {
-                highlightsFields = story_lines_highlights.map( ( location, index ) => {
-                    return <Fragment key={ index }>
-                        <TextControl
-                            className="grf__location-address"
-                            placeholder="Story Highlight"
-                            value={ story_lines_highlights[ index ].text }
-                            onChange={ ( text ) => handleTextChange( text, index ) }
-                        />
-                        <URLInput
-                            className={ className }
-                            value={ story_lines_highlights[ index ].anchor }
-                            onChange={ ( anchor ) => handleAnchorChange( anchor, index ) }
-                        />
-                        <IconButton
-                            className="grf__remove-location-address"
-                            icon="no-alt"
-                            label="Delete location"
-                            onClick={ () => handleRemoveLocation( index ) }
-                        />
-                    </Fragment>;
-                } );
-
-            }
-
-            return [
-                <InspectorControls key="inspector">
-                    <PanelColorSettings
+        return [
+            <InspectorControls key="1">
+                <PanelBody title={ __( 'Highlights Title' ) }>
+                    <TextControl
+                        placeholder=""
+                        value={ props.attributes.story_lines_title }
+                        onChange={ ( story_lines_title ) => props.setAttributes( story_lines_title ) }
+                    />
+                </PanelBody>
+                <PanelBody title={ __( 'Locations' ) }>
+                    { highlightFields }
+                    <Button
+                        isDefault
+                        onClick={ handleAddLocation.bind( this ) }
+                    >
+                        { __( 'Add Location' ) }
+                    </Button>
+                </PanelBody>
+                <PanelColorSettings
                         title={ __( 'Title Background Color', 'atomic-blocks' ) }
                         initialOpen={ false }
                         colorSettings={ [ {
-                            value: story_lines_title_background,
-                            onChange: story_lines_title_background,
+                            value: props.attributes.story_lines_title_background,
+                            onChange: ( colorValue ) => props.setAttributes( { story_lines_title_background: colorValue } ),
                             label: __( 'Title Background Color', 'atomic-blocks' ),
                         } ] }
                     >
@@ -142,8 +173,8 @@ registerBlockType(
                         title={ __( 'Section Background Color', 'atomic-blocks' ) }
                         initialOpen={ false }
                         colorSettings={ [ {
-                            value: story_lines_main_background,
-                            onChange: story_lines_main_background,
+                            value: props.attributes.story_lines_main_background,
+                            onChange: ( colorValue ) => props.setAttributes( { story_lines_main_background: colorValue } ),
                             label: __( 'Title Background Color', 'atomic-blocks' ),
                         } ] }
                     >
@@ -152,8 +183,8 @@ registerBlockType(
                         title={ __( 'Title Color', 'atomic-blocks' ) }
                         initialOpen={ false }
                         colorSettings={ [ {
-                            value: story_lines_title_color,
-                            onChange: story_lines_title_color,
+                            value: props.attributes.story_lines_title_color,
+                            onChange: ( colorValue ) => props.setAttributes( { story_lines_title_color: colorValue } ),
                             label: __( 'Title Color', 'atomic-blocks' ),
                         } ] }
                     >
@@ -162,46 +193,34 @@ registerBlockType(
                         title={ __( 'Text Color', 'atomic-blocks' ) }
                         initialOpen={ false }
                         colorSettings={ [ {
-                            value: story_lines_main_color,
-                            onChange: story_lines_main_color,
+                            value: props.attributes.story_lines_main_color,
+                            onChange: ( colorValue ) => props.setAttributes( { story_lines_main_color: colorValue } ),
                             label: __( 'Text Color', 'atomic-blocks' ),
                         } ] }
                     >
                     </PanelColorSettings>
-                </InspectorControls>,
-                <div className={className}>
-                    <TextControl
-                        className="grf__location-address"
-                        placeholder="350 Fifth Avenue New York NY"
-                        value={ story_lines_title }
-                        onChange={ ( story_lines_title ) => setAttributes( story_lines_title ) }
-                    />
-                    { highlightsFields }
-                    <Button
-                        isDefault
-                        onClick={ handleAddLocation.bind( this ) }
-                    >
-                        { __( 'Add Highlight' ) }
-                    </Button>
-                </div>
-            ];
-        },
+            </InspectorControls>,
+            <div key="2" className={ props.className }>
+                <h2>Block</h2>
+                <ul>
+                    { highlightDisplay }
+                </ul>
+            </div>,
+        ];
+    },
+    save: ( props ) => {
+        const highlightDisplay = props.attributes.story_lines_highlights.map( ( highlight, index ) => {
+            return <li key={ index }><a href={ '#' + highlight.target }>{ highlight.text }</a></li>;
+        } );
 
-        save( { attributes, setAttributes, focus, setFocus, className } ) {
-            const { story_lines_title, story_lines_title_background, story_lines_main_background, story_lines_title_color, story_lines_main_color, story_lines_highlights  } = attributes;
+        return (
+            <div className={ props.className }>
+                <h2>Block</h2>
+                <ul>
+                    { highlightDisplay }
+                </ul>
+            </div>
+        );
+    },
+} );
 
-            const highlights = story_lines_highlights.map( ( highlight, index ) => {
-                return <li key={ index }><a href={ '#' + highlight.anchor }>{ highlight.text }</a></li>;
-            } );
-
-            return (
-                <div className={ props.className }>
-                    <h2>{ story_lines_title }</h2>
-                    <ul>
-                        { highlights }
-                    </ul>
-                </div>
-            );
-        },
-    }
-);
