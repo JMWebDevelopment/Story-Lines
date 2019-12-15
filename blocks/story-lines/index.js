@@ -74,6 +74,9 @@ registerBlockType( 'story-lines/story-lines', {
             default: 'none'
         }
     },
+    supports: {
+        align: true,
+    },
     keywords: [
         __( 'story' ),
         __( 'description' ),
