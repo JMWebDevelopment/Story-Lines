@@ -134,9 +134,21 @@ function story_lines_blocks_editor_scripts() {
 		]);
 	// Enqueue optional editor only styles
 	wp_enqueue_style(
-		'jm-live-blog-editor-css',
+		'story-lines-editor-css',
 		plugins_url( $editorStylePath, __FILE__)
 	);
 }
 // Hook scripts function into block editor hook
 add_action( 'enqueue_block_editor_assets', 'story_lines_blocks_editor_scripts' );
+
+function story_lines_block_scripts() {
+	// Make paths variables so we don't write em twice ;)
+	$stylePath = '/assets/css/blocks.style.css';
+	// Enqueue optional editor only styles
+	wp_enqueue_style(
+		'story-lines-block-css',
+		plugins_url( $stylePath, __FILE__)
+	);
+}
+// Hook scripts function into block editor hook
+add_action( 'enqueue_block_assets', 'story_lines_block_scripts' );

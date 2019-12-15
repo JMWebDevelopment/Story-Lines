@@ -163,13 +163,13 @@ registerBlockType( 'story-lines/story-lines', {
                         onChange={ ( story_lines_title ) => props.setAttributes( story_lines_title ) }
                     />
                 </PanelBody>
-                <PanelBody title={ __( 'Locations' ) }>
+                <PanelBody title={ __( 'Highlights' ) }>
                     { highlightFields }
                     <Button
                         isDefault
                         onClick={ handleAddLocation.bind( this ) }
                     >
-                        { __( 'Add Location' ) }
+                        { __( 'Add Highlight' ) }
                     </Button>
                 </PanelBody>
                 <PanelColorSettings

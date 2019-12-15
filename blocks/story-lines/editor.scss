@@ -25,20 +25,22 @@
   margin: 10px 0;
   background-color: #252525;
   padding-bottom: 5px;
-}
-.wp-block-story-lines-story-lines .title {
-  color: #FFFFFF;
-  background-color: #000000;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 24px;
-  margin: 0 0 15px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.wp-block-story-lines-story-lines ul {
-  padding: 0 8px;
-}
-.wp-block-story-lines-story-lines li {
-  color: #FFFFFF;
+  h2 {
+    color: #FFFFFF;
+    background-color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    margin: 0 0 15px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  ul {
+    padding: 0 8px;
+    margin-left: 2rem;
+    li {
+      color: #FFFFFF;
+      padding-left: 1rem;
+    }
+  }
 }
