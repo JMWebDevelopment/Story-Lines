@@ -1,6 +1,8 @@
 import './editor.scss';
 import './style.scss';
 
+import icon from './icon';
+
 const {
     __,
 } = wp.i18n;
@@ -42,7 +44,7 @@ const {
  */
 registerBlockType( 'story-lines/story-lines', {
     title: __( 'Story Lines' ),
-    icon: 'shield',
+    icon: icon,
     category: 'common',
     attributes: {
         story_lines_highlights: {
