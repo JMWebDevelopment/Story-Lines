@@ -6,7 +6,7 @@
  *
  * @author Jacob Martella
  * @package Read More About
- * @version 1.5
+ * @version 1.6
  * @since 1.2
  */
 function story_lines_contextual_help( $contextual_help, $screen_id, $screen ) {
