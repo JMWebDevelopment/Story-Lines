@@ -3,7 +3,7 @@
 * Plugin Name: Story Lines
 * Plugin URI: http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
 * Description: Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
-* Version: 1.5.1
+* Version: 1.8
 * Author: Jacob Martella
 * Author URI: http://www.jacobmartella.com
 * License: GPLv3
@@ -113,4 +113,42 @@ include_once( STORY_LINE_PATH . 'story-lines-widget.php' );
 
 //* Load the Contextual Help
 include_once( STORY_LINE_PATH . 'admin/story-lines-help.php' );
-?>
+
+function story_lines_blocks_editor_scripts() {
+	// Make paths variables so we don't write em twice ;)
+	$blockPath = '/js/editor.blocks.js';
+	$editorStylePath = '/assets/css/blocks.editor.css';
+	// Enqueue the bundled block JS file
+	wp_enqueue_script(
+		'story-lines-blocks-js',
+		plugins_url( $blockPath, __FILE__ ),
+		[ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-api' ],
+		filemtime( plugin_dir_path(__FILE__) . $blockPath )
+	);
+	// Pass in REST URL
+	wp_localize_script(
+		'story-lines-blocks-js',
+		'jsforwp_globals',
+		[
+			'rest_url' => esc_url( rest_url() )
+		]);
+	// Enqueue optional editor only styles
+	wp_enqueue_style(
+		'story-lines-editor-css',
+		plugins_url( $editorStylePath, __FILE__)
+	);
+}
+// Hook scripts function into block editor hook
+add_action( 'enqueue_block_editor_assets', 'story_lines_blocks_editor_scripts' );
+
+function story_lines_block_scripts() {
+	// Make paths variables so we don't write em twice ;)
+	$stylePath = '/assets/css/blocks.style.css';
+	// Enqueue optional editor only styles
+	wp_enqueue_style(
+		'story-lines-block-css',
+		plugins_url( $stylePath, __FILE__)
+	);
+}
+// Hook scripts function into block editor hook
+add_action( 'enqueue_block_assets', 'story_lines_block_scripts' );

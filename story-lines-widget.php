@@ -6,7 +6,7 @@
  *
  * @author Jacob Martella
  * @package Read More About
- * @version 1.5
+ * @version 1.6
  * @since 1.2
  */
 class Story_Lines_Widget extends WP_Widget {
