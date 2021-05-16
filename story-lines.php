@@ -1,154 +1,73 @@
-<?php 
-/*
-* Plugin Name: Story Lines
-* Plugin URI: http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
-* Description: Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
-* Version: 1.8
-* Author: Jacob Martella
-* Author URI: http://www.jacobmartella.com
-* License: GPLv3
-*/
+<?php
 /**
-* Set up the plugin when the user activates the plugin. Adds the breaking news custom post type the text domain for translations.
-*/
-$story_lines_plugin_path = plugin_dir_path( __FILE__ );
-define( 'STORY_LINE_PATH', $story_lines_plugin_path );
+ * Plugin Name:       Story Lines
+ * Plugin URI:        http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
+ * Description:       Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
+ * Version:           2.0
+ * Author:            Jacob Martella Web Development
+ * Author URI:        https://jacobmartella.com
+ * Text Domain:       story-lines
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Domain Path:       /languages
+ *
+ * @package    Story_Lines
+ * @subpackage Story_Lines/includes
+ */
 
-//* Load the custom fields
-include_once( STORY_LINE_PATH . 'admin/story-lines-admin.php' );
+namespace Story_Lines;
 
-//* Load the text domain
-function story_lines_load_plugin_textdomain() {
-	load_plugin_textdomain( 'story-lines', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+// If this file is called directly, then about execution.
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
-add_action( 'plugins_loaded', 'story_lines_load_plugin_textdomain' );
-
-/**
-* Loads the styles for the read more about section on the front end
-*/
-function story_lines_styles() {
-	wp_enqueue_style( 'story-lines-style', plugin_dir_url(__FILE__) . 'css/story-lines.css' );
-	wp_enqueue_style( 'roboto', '//fonts.googleapis.com/css?family=Roboto:400,300,100,700', array(), '', 'all' );
-}
-add_action( 'wp_enqueue_scripts', 'story_lines_styles' );
 
 /**
-* Loads and prints the styles for the breaking news custom post type
-*/
-function story_lines_admin_style() {
-	global $typenow;
-	if ( $typenow == 'post' ) {
-		wp_enqueue_style( 'story_lines_admin_styles', plugin_dir_url(__FILE__) . 'css/story-lines-admin.css' );
-	}
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-jm-starter-plugin-activator.php
+ *
+ * @since 1.0.0
+ */
+function activate_story_lines() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-story-lines-activator.php';
+	Story_Lines_Activator::activate();
 }
-add_action( 'admin_print_styles', 'story_lines_admin_style' );
 
 /**
-* Loads the script for the breaking news custom post type
-*/
-function story_lines_admin_scripts() {
-	global $typenow;
-	if ( $typenow == 'post' ) {
-		wp_enqueue_script( 'story_lines_admin_script', plugin_dir_url(__FILE__) . 'js/story-lines-admin.js' );
-	}
-}
-add_action( 'admin_enqueue_scripts', 'story_lines_admin_scripts' );
-
-//* Register and create the shortcode to display the section
-function story_lines_register_shortcode() {
-	add_shortcode( 'story-lines', 'story_lines_shortcode' );
-}
-add_action( 'init', 'story_lines_register_shortcode' );
-function story_lines_shortcode( $atts ) {
-	extract( shortcode_atts( array(
-	), $atts ) );
-	$the_post_id = get_the_ID();
-
-	if ( get_post_meta( $the_post_id, 'story_lines_title', true ) ) { $title = get_post_meta( $the_post_id, 'story_lines_title', true ); } else { $title = __( 'Story Lines', 'story-lines' ); }
-	if ( get_post_meta( $the_post_id, 'story_lines_size', true ) ) { $size = 'width: ' . esc_attr( get_post_meta( $the_post_id, 'story_lines_size', true ) ) . '%;'; } else { $size = 'width: 25%;'; }
-	if ( get_post_meta( $the_post_id, 'story_lines_float', true ) ) { $float =  esc_attr( get_post_meta( $the_post_id, 'story_lines_float', true ) ); } else { $float = 'left'; }
-	if ( get_post_meta( $the_post_id, 'story_lines_highlights', true ) ) { $highlights = get_post_meta( $the_post_id, 'story_lines_highlights', true ); } else { $highlights = ''; }
-	if ( get_post_meta( $the_post_id, 'story_lines_title_background', true ) ) { $title_bg_color = 'background-color: ' . esc_attr( get_post_meta( $the_post_id, 'story_lines_title_background', true ) ) . ';'; } else { $title_bg_color = ''; }
-	if ( get_post_meta( $the_post_id, 'story_lines_main_background', true ) ) { $main_bg_color = 'background-color: ' . esc_attr( get_post_meta( $the_post_id, 'story_lines_main_background', true ) ) . ';'; } else { $main_bg_color = ''; }
-	if ( get_post_meta( $the_post_id, 'story_lines_title_color', true ) ) { $title_color = 'color: ' . esc_attr( get_post_meta( $the_post_id, 'story_lines_title_color', true ) ) . ';'; } else { $title_color = ''; }
-	if ( get_post_meta( $the_post_id, 'story_lines_main_color', true ) ) { $main_color = 'color: ' . esc_attr( get_post_meta( $the_post_id, 'story_lines_main_color', true ) ) . ';'; } else { $main_color = ''; }
-
-	$html = '';
-
-	if ($highlights) {
-		$html .= '<aside class="story-lines ' . $float . '" style="' . $size . $main_bg_color . '">';
-		$html .= '<h2 class="title" style="' . $title_bg_color . $title_color . '">' . $title . '</h2>';
-		$html .= '<ul>';
-		foreach ( $highlights as $highlight ) {
-			if ( isset( $highlight[ 'story_lines_anchor_id' ] ) ) {
-				$html .= '<li><a href="#' . $highlight[ 'story_lines_anchor_id' ] . '" style="' . $main_color . '">' . $highlight[ 'story_lines_highlight' ] . '</a></li>';
-			} else {
-				$html .= '<li style="' . $main_color . '">' . $highlight[ 'story_lines_highlight' ] . '</li>';
-			}
-		}
-		$html .= '</ul>';
-		$html .= '</aside>';
-	}
-
-	return $html;
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-starter-plugin-deactivator.php
+ *
+ * @since 1.0.0
+ */
+function deactivate_story_lines() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-story-lines-deactivator.php';
+	Story_Lines_Deactivator::deactivate();
 }
 
-//* Add a button to the TinyMCE Editor to make it easier to add the shortcode
-add_action( 'init', 'story_lines_buttons' );
-function story_lines_buttons() {
-    add_filter( 'mce_external_plugins', 'story_lines_add_buttons' );
-    add_filter( 'mce_buttons', 'story_lines_register_buttons' );
-}
-function story_lines_add_buttons( $plugin_array ) {
-    $plugin_array[ 'story_lines' ] = plugin_dir_url(__FILE__) . 'js/story-lines-admin-button.js';
-    return $plugin_array;
-}
-function story_lines_register_buttons( $buttons ) {
-    array_push( $buttons, 'story_lines' );
-    return $buttons;
+register_activation_hook( __FILE__, __NAMESPACE__ . '\activate_story_lines' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deactivate_story_lines' );
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-story-lines.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_story_lines() {
+
+	$spmm = new Story_Lines();
+	$spmm->run();
+
 }
 
-//* Load the Widget
-include_once( STORY_LINE_PATH . 'story-lines-widget.php' );
-
-//* Load the Contextual Help
-include_once( STORY_LINE_PATH . 'admin/story-lines-help.php' );
-
-function story_lines_blocks_editor_scripts() {
-	// Make paths variables so we don't write em twice ;)
-	$blockPath = '/js/editor.blocks.js';
-	$editorStylePath = '/assets/css/blocks.editor.css';
-	// Enqueue the bundled block JS file
-	wp_enqueue_script(
-		'story-lines-blocks-js',
-		plugins_url( $blockPath, __FILE__ ),
-		[ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-api' ],
-		filemtime( plugin_dir_path(__FILE__) . $blockPath )
-	);
-	// Pass in REST URL
-	wp_localize_script(
-		'story-lines-blocks-js',
-		'jsforwp_globals',
-		[
-			'rest_url' => esc_url( rest_url() )
-		]);
-	// Enqueue optional editor only styles
-	wp_enqueue_style(
-		'story-lines-editor-css',
-		plugins_url( $editorStylePath, __FILE__)
-	);
-}
-// Hook scripts function into block editor hook
-add_action( 'enqueue_block_editor_assets', 'story_lines_blocks_editor_scripts' );
-
-function story_lines_block_scripts() {
-	// Make paths variables so we don't write em twice ;)
-	$stylePath = '/assets/css/blocks.style.css';
-	// Enqueue optional editor only styles
-	wp_enqueue_style(
-		'story-lines-block-css',
-		plugins_url( $stylePath, __FILE__)
-	);
-}
-// Hook scripts function into block editor hook
-add_action( 'enqueue_block_assets', 'story_lines_block_scripts' );
+// Call the above function to begin execution of the plugin.
+run_story_lines();
