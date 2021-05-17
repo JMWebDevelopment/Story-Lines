@@ -49,13 +49,148 @@ class Story_Lines_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_styles() { }
+	public function enqueue_styles() {
+		global $typenow;
+		if ( 'post' === $typenow || 'page' === $typenow ) {
+			wp_enqueue_style( 'story-lines-admin', plugin_dir_url( __FILE__ ) . 'css/admin-style.min.css', [], $this->version, 'all' );
+		}
+	}
 
 	/**
 	 * Enqueues the scripts for the admin side of the plugin.
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_scripts() { }
+	public function enqueue_scripts() {
+		global $typenow;
+		if ( 'post' === $typenow || 'page' === $typenow ) {
+			wp_enqueue_script( 'story-lines-admin-script', plugin_dir_url( __FILE__ ) . 'js/story-lines-admin.min.js', [ 'jquery' ], $this->version, 'all' );
+		}
+	}
+
+	public function contextual_help( $contextual_help, $screen_id, $screen ) {
+		if ( 'post' === $screen->id ) {
+			$contextual_help = '<h2>' . __( 'Story Lines Help', 'story-lines' ) . '</h2>';
+			$contextual_help .= '<ul>';
+			$contextual_help .= '<li>' . __( 'Anchor Links', 'story-lines' ) . '<br />' . __( 'To create and add anchor links to the story lines, first wrap the area you want to jump to in a div or span and give the element an id (i.e. &lt;span id="your-id"&gt;). Then add the id you have given the section to the appropriate story line.', 'story-lines' ) . '</li>';
+			$contextual_help .= '</ul>';
+		}
+
+		return $contextual_help;
+	}
+
+	public function add_meta_box() {
+		add_meta_box( 'story-lines-meta', __( 'Add Story Lines', 'story-lines' ), [ $this, 'create_meta_box' ], ['post', 'page' ], 'normal', 'default' );
+	}
+
+	public function create_meta_box() {
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/story-lines-meta-box.php';
+	}
+
+	public function meta_box_save( $post_id ) {
+		$float_array = [
+			'left'   => __( 'Left', 'story-lines' ),
+			'center' => __( 'Center', 'story-lines' ),
+			'right'  => __( 'Right', 'story-lines' ),
+		];
+
+		if ( ! isset( $_POST['story_lines_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['story_lines_meta_box_nonce'], 'story_lines_meta_box_nonce' ) ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		$old = get_post_meta( $post_id, 'story_lines_highlights', true );
+		$new = array();
+
+		$lines = $_POST['story_lines_highlight'];
+		$anchor_ids = $_POST['story_lines_anchor_id'];
+
+		$num = count( $lines );
+
+		if ( isset( $_POST['story_lines_title'] ) ) {
+			update_post_meta( $post_id, 'story_lines_title', sanitize_text_field( wp_filter_nohtml_kses( $_POST['story_lines_title'] ) ) );
+		}
+
+		if ( isset( $_POST['story_lines_size'] ) ) {
+			update_post_meta( $post_id, 'story_lines_size', wp_filter_nohtml_kses( intval( $_POST['story_lines_size'] ) ) );
+		}
+
+		if ( $_POST['story_lines_float'] && array_key_exists( $_POST['story_lines_float'], $float_array ) ) {
+			update_post_meta( $post_id, 'story_lines_float', wp_filter_nohtml_kses( $_POST['story_lines_float'] ) );
+		}
+
+		$title_bg_color = trim( $_POST['story_lines_title_background'] );
+		$title_bg_color = wp_strip_all_tags( stripslashes( $title_bg_color ) );
+
+		if ( true === $this->check_color( $title_bg_color ) ) {
+			update_post_meta( $post_id, 'story_lines_title_background', $title_bg_color );
+		}
+
+		$main_bg_color = trim( $_POST['story_lines_main_background'] );
+		$main_bg_color = wp_strip_all_tags( stripslashes( $main_bg_color ) );
+
+		if ( true === $this->check_color( $main_bg_color ) ) {
+			update_post_meta( $post_id, 'story_lines_main_background', $main_bg_color );
+		}
+
+		$title_color = trim( $_POST['story_lines_title_color'] );
+		$title_color = wp_strip_all_tags( stripslashes( $title_color ) );
+
+		if ( true === $this->check_color( $title_color ) ) {
+			update_post_meta( $post_id, 'story_lines_title_color', $title_color );
+		}
+
+		$main_color = trim( $_POST['story_lines_main_color'] );
+		$main_color = wp_strip_all_tags( stripslashes( $main_color ) );
+
+		if ( true === $this->check_color( $main_color ) ) {
+			update_post_meta( $post_id, 'story_lines_main_color', $main_color );
+		}
+
+		for ( $i = 0; $i < $num; $i++ ) {
+			if ( isset( $lines[ $i ] ) ) {
+				$new[ $i ]['story_lines_highlight'] = sanitize_text_field( wp_filter_nohtml_kses( $lines[ $i ] ) );
+			}
+			if ( isset( $anchor_ids[ $i ] ) ) {
+				$new[ $i ]['story_lines_anchor_id'] = sanitize_text_field( wp_filter_nohtml_kses( $anchor_ids[ $i ] ) );
+			}
+		}
+
+		if ( ! empty( $new ) && $new !== $old ) {
+			update_post_meta( $post_id, 'story_lines_highlights', $new );
+		} elseif ( empty( $new ) && $old ) {
+			delete_post_meta( $post_id, 'story_lines_highlights', $old );
+		}
+	}
+
+	public function check_color( $value ) {
+		if ( preg_match( '/^#[a-f0-9]{6}$/i', $value ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function story_lines_buttons() {
+		add_filter( 'mce_external_plugins', [ $this, 'add_buttons' ] );
+		add_filter( 'mce_buttons', [ $this, 'register_buttons' ] );
+	}
+
+	public function add_buttons( $plugin_array ) {
+		$plugin_array['story_lines'] = plugin_dir_url(__FILE__) . 'js/story-lines-admin-button.min.js';
+		return $plugin_array;
+	}
+
+	public function register_buttons( $buttons ) {
+		array_push( $buttons, 'story_lines' );
+		return $buttons;
+	}
 
 }
