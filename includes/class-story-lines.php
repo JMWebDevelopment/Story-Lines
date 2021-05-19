@@ -125,10 +125,11 @@ class Story_Lines {
 		$admin = new Story_Lines_Admin( $this->get_version() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'contextual_help', $admin, 'contextual_help' );
+		$this->loader->add_action( 'contextual_help', $admin, 'contextual_help', 10, 3 );
 		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $admin, 'meta_box_save' );
 		$this->loader->add_action( 'init', $admin, 'story_lines_buttons' );
+		$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
 	}
 
 	/**

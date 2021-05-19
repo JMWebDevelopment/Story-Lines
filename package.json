@@ -112,9 +112,7 @@
     "webpack-cli": "^4.7.0"
   },
   "babel": {
-    "presets": [
-      "@babel/env"
-    ]
+    "presets": [ "@wordpress/default" ]
   },
   "eslintConfig": {
     "extends": "plugin:@wordpress/eslint-plugin/recommended",
