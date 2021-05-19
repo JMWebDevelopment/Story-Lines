@@ -2,8 +2,9 @@
 Contributors: ArenaPigskin
 Tags: story lines, story highlights, shortcodes, custom meta panel
 Requires at least: 4.0
-Tested up to: 5.3.2
-Stable tag: 1.6
+Tested up to: 5.7.2
+Requires PHP: 7.0
+Stable tag: 2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -22,6 +23,11 @@ One of the common features of online news stories is a section that displays two
 2. The Story Lines section of the post editor.
 
 == Changelog ==
+= 2.0 =
+- Refactor the entire plugin to use an object-oriented programming paradigm.
+- Upped the lowest PHP version supported to 7.0.
+- Tested to work with WordPress 5.7.1.
+
 = 1.6 =
 - Added the Story Lines Gutenberg block.
 - Tested with WordPress 5.3.
