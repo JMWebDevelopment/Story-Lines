@@ -1,7 +1,7 @@
 
 <?php
 /**
- * File that displays the custom meta box for the breaking custom post type.
+ * File that displays the custom meta box for the story lines.
  *
  * PHP version 7.3
  *

@@ -68,7 +68,15 @@ class Story_Lines_Public {
 		add_shortcode( 'story-lines', [ $this, 'story_lines_shortcode' ] );
 	}
 
-	function story_lines_shortcode( $atts ) {
+	/**
+	 * Renders the Story Lines shortcode.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $atts      The attributes for the shortcode.
+	 * @return string          The HTML for the read more about shortcode.
+	 */
+	public function story_lines_shortcode( $atts ) {
 		extract(
 			shortcode_atts(
 				[],

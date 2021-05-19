@@ -68,6 +68,16 @@ class Story_Lines_Admin {
 		}
 	}
 
+	/**
+	 * Displays help text in the contextual menu.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string    $contextual_help      The incoming text for contextual help.
+	 * @param int       $screen_id               The id of the current screen.
+	 * @param WP_Screen $screen            The current screen.
+	 * @return string                      The new contextual help screen text.
+	 */
 	public function contextual_help( $contextual_help, $screen_id, $screen ) {
 		if ( 'post' === $screen->id ) {
 			$contextual_help = '<h2>' . __( 'Story Lines Help', 'story-lines' ) . '</h2>';
@@ -79,14 +89,31 @@ class Story_Lines_Admin {
 		return $contextual_help;
 	}
 
+	/**
+	 * Adds in the meta box for the story lines.
+	 *
+	 * @since 2.0.0
+	 */
 	public function add_meta_box() {
 		add_meta_box( 'story-lines-meta', __( 'Add Story Lines', 'story-lines' ), [ $this, 'create_meta_box' ], ['post', 'page' ], 'normal', 'default' );
 	}
 
+	/**
+	 * Loads in the custom meta box for the story lines.
+	 *
+	 * @since 2.0.0
+	 */
 	public function create_meta_box() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/story-lines-meta-box.php';
 	}
 
+	/**
+	 * Saves the data in the meta box for the story lines.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int $post_id      The ID of the post.
+	 */
 	public function meta_box_save( $post_id ) {
 		$float_array = [
 			'left'   => __( 'Left', 'story-lines' ),
@@ -170,6 +197,14 @@ class Story_Lines_Admin {
 		}
 	}
 
+	/**
+	 * Checks to make sure the value is a color in hexidecimal format.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $value      The color value given.
+	 * @return bool              Whether or not the value is a color code in hexidecimal format.
+	 */
 	public function check_color( $value ) {
 		if ( preg_match( '/^#[a-f0-9]{6}$/i', $value ) ) {
 			return true;
@@ -178,16 +213,35 @@ class Story_Lines_Admin {
 		return false;
 	}
 
+	/**
+	 * Adds in the TinyMCE Editor buttons.
+	 *
+	 * @since 2.0.0
+	 */
 	public function story_lines_buttons() {
 		add_filter( 'mce_external_plugins', [ $this, 'add_buttons' ] );
 		add_filter( 'mce_buttons', [ $this, 'register_buttons' ] );
 	}
 
+	/**
+	 * Adds in the JavaScript for the button.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $plugin_array      The incoming array of plugins.
+	 */
 	public function add_buttons( $plugin_array ) {
 		$plugin_array['story_lines'] = plugin_dir_url(__FILE__) . 'js/story-lines-admin-button.min.js';
 		return $plugin_array;
 	}
 
+	/**
+	 * Adds in the button for the TinyMCY editor.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $buttons      The incoming array of buttons.
+	 */
 	public function register_buttons( $buttons ) {
 		array_push( $buttons, 'story_lines' );
 		return $buttons;

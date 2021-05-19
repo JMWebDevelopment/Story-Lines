@@ -1,78 +1,41 @@
 # Changelog
 
-All of the changes for the JM Client Manager are stored here.
+## 2.0
+- Refactor the entire plugin to use an object-oriented programming paradigm.
+- Upped the lowest PHP version supported to 7.0.
+- Tested to work with WordPress 5.7.1.
 
-## [1.7.0] - 2020-09-15
+## 1.6
+- Added the Story Lines Gutenberg block.
+- Tested with WordPress 5.3.
 
-### Added
-- Added Google Ads tab to Client Manager analytics page.
+## 1.5.1
+- Tested with WordPress 4.9.
 
-## [1.6.0] - 2020-08-15
+## 1.5
+- Added support to show story lines on pages as well as posts.
 
-### Added
-- Added changes to accomodate the community subsite.
+## 1.4
+- Better organized the custom fields.
+- Added padding around the story lines on the front end.
+- Tested with WordPress 4.8.
 
-## [1.5.0] - 2020-07-30
+## 1.3
+- Tested with WordPress 4.7.
 
-### Added
-- Added responsive styling for Google Data Studio reports.
+## 1.2
+- Added widget to display story lines for an article in the sidebar.
+- Added ability for users to add anchor links to the story lines so that each highlight can lead to a section inside the post.
+- Added French, German, Italian, Spanish and Russian translations.
+- Tested with WordPress 4.6.
 
-## [1.4.1] - 2020-07-15
+## 1.1
+- Allowed users to reorder the story lines.
+- Added users the ability to customize the colors of the story lines section of the post.
+- Tested with WordPress 4.5.
 
-### Fixed
-- Updated the id for the Freelancing form to match the live website.
+## 1.0.1
+- Fixed: Issue with float option not saving correctly.
 
-## [1.4.0] - 2020-07-15
-
-### Added
-- Added in a calendar dashboard widget.
-- Added in a financials dashboard widget.
-- Added in a tasks dashboard widget.
-- Added in a analytics dashboard widget.
-
-## [1.3.0] - 2020-06-30
-
-### Added
-- Added in ability to track expenses inside the client manager plugin.
-- Added a back button for the tasks section.
-
-### Fixed
-- Visual testing on local and staging.
-
-## [1.2.0] - 2020-06-15
-
-### Added
-- Added new reports for Analytics, Search Console and YouTube.
-
-### Fixed
-- Issue with task comments being assigned to the first task instead of their respective task.
-- Made the tasks page three columns on wide screens.
-
-## [1.1.1] - 2020-05-30
-
-### Fixed
-- Updated the ids for the Gravity Forms to match the live website.
-
-## [1.1.0] - 2020-05-30
-
-### Added
-- Added in an options page.
-- Added in a page to show different analytics from Google Analytics, Search Console and YouTube.
-- Added in support for events.
-
-### Fixed
-- Fixed PHP errors on the clients and contacts pages.
-
-## [1.0.1] - 2020-05-17
-
-### Fixed
-- Fixed issue with not being able to view a single task.
-- Fixed issue with not being able to view a single invoice.
-- Fixed issue with amount doubling when updating an invoice.
-- Fixed issue with invoice paid date not showing up.
-- Fixed issue with invoice items check marks not showing up.
-
-## [1.0.0] - 2020-05-17
-
-### Added
-- Add in the first version of the plugin.
+## 1.0
+- Initial Release

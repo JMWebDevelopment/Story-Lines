@@ -12,7 +12,7 @@
  */
 
 /**
- * story-lines-widget.php
+ * Story-lines-widget.php
  *
  * Creates the widget to show the story lines in the sidebar of a single post
  *
