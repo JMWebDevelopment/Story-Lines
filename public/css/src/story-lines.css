@@ -1,0 +1,50 @@
+@import "_custom-properties.css";
+@import "_custom-mixins.css";
+
+.story-lines {
+	position: relative;
+	margin: 10px 0;
+	background-color: #252525;
+	padding-bottom: 5px;
+}
+
+.story-lines.left {
+	float: left;
+	margin-right: 10px;
+}
+
+.story-lines.center {
+	margin: auto;
+	clear: both;
+}
+
+.story-lines.right {
+	float: right;
+	margin-left: 10px;
+}
+
+.story-lines .title {
+	color: #fff;
+	background-color: #000;
+	font-weight: 300;
+	font-size: 24px;
+	margin: 0;
+	margin-bottom: 15px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.story-lines ul {
+	padding: 0 8px;
+}
+
+.story-lines li {
+	color: #FFFFFF;
+}
+
+@media only screen and (max-width: 500px) {
+
+	.story-lines {
+		width: 100% !important;
+	}
+}
