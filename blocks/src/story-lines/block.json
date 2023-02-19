@@ -5,10 +5,45 @@
 	"version": "0.1.0",
 	"title": "Story Lines",
 	"category": "widgets",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "story_lines_highlights": {
+      "type": "array",
+      "default": []
+    },
+    "story_lines_title": {
+      "type": "string",
+      "default": "Story Lines"
+    },
+    "story_lines_title_background": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "story_lines_main_background": {
+      "type": "string",
+      "default": "#252525"
+    },
+    "story_lines_title_color": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "story_lines_main_color": {
+      "type": "string",
+      "default": "#FFFFFF"
+   }
+  },
 	"supports": {
-		"html": false
+		"align": [ "wide", "full" ],
+		"html": false,
+		"color": {
+			"gradients": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"__experimentalLayout": true
 	},
 	"textdomain": "story-lines",
 	"editorScript": "file:./index.js",
