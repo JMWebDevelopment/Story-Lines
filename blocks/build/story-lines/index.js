@@ -10,7 +10,7 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ Edit; }
+/* harmony export */   "Edit": function() { return /* binding */ Edit; }
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
@@ -54,6 +54,24 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function Edit(props) {
+  var attributes = props.attributes,
+    setAttributes = props.setAttributes,
+    setStoryLinesTitleBackgroundColor = props.setStoryLinesTitleBackgroundColor,
+    setStoryLinesMainBackgroundColor = props.setStoryLinesMainBackgroundColor,
+    setStoryLinesTitleColor = props.setStoryLinesTitleColor,
+    setStoryLinesMainColor = props.setStoryLinesMainColor,
+    storyLinesMainBackgroundColor = props.storyLinesMainBackgroundColor,
+    storyLinesTitleBackgroundColor = props.storyLinesTitleBackgroundColor,
+    storyLinesTitleColor = props.storyLinesTitleColor,
+    storyLinesMainColor = props.storyLinesMainColor;
+  var storyLinesMainBackgroundColorValue = attributes.storyLinesMainBackgroundColorValue,
+    storyLinesTitleBackgroundColorValue = attributes.storyLinesTitleBackgroundColorValue,
+    storyLinesTitleColorValue = attributes.storyLinesTitleColorValue,
+    storyLinesMainColorValue = attributes.storyLinesMainColorValue;
+  var _useGradient = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.__experimentalUseGradient)(),
+    gradientClass = _useGradient.gradientClass,
+    gradientValue = _useGradient.gradientValue,
+    setGradient = _useGradient.setGradient;
   var handleAddLocation = function handleAddLocation() {
     var story_lines_highlights = (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(props.attributes.story_lines_highlights);
     story_lines_highlights.push({
@@ -96,7 +114,7 @@ function Edit(props) {
     color: props.attributes.story_lines_main_color
   };
   var highlightFields, highlightDisplay;
-  console.log(props.attributes.story_lines_highlights.length);
+  console.log(props.attributes.story_lines_title_background);
   if (props.attributes.story_lines_highlights.length) {
     console.log('here');
     highlightFields = props.attributes.story_lines_highlights.map(function (location, index) {
@@ -138,74 +156,80 @@ function Edit(props) {
     });
   }
   console.log(highlightDisplay);
-  return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, {
-    key: "1"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+  return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Highlights Title')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.TextControl, {
     placeholder: "",
     value: props.attributes.story_lines_title,
-    onChange: function onChange(story_lines_title) {
-      return props.setAttributes(story_lines_title);
+    onChange: function onChange(titleValue) {
+      return props.setAttributes({
+        story_lines_title: titleValue
+      });
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Highlights')
   }, highlightFields, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
     onClick: handleAddLocation.bind(this)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add Highlight'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'atomic-blocks'),
-    initialOpen: false,
-    colorSettings: [{
-      value: props.attributes.story_lines_title_background,
-      onChange: function onChange(colorValue) {
-        return props.setAttributes({
-          story_lines_title_background: colorValue
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add Highlight'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.__experimentalPanelColorGradientSettings, {
+    className: "outermost-icon-block__color-settings",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Color'),
+    initialOpen: true,
+    enableAlpha: true,
+    settings: [{
+      colorValue: storyLinesTitleBackgroundColor.color || storyLinesTitleBackgroundColorValue,
+      onColorChange: function onColorChange(colorValue) {
+        setStoryLinesTitleBackgroundColor(colorValue);
+        setAttributes({
+          storyLinesTitleBackgroundColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'atomic-blocks')
-    }]
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Section Background Color', 'atomic-blocks'),
-    initialOpen: false,
-    colorSettings: [{
-      value: props.attributes.story_lines_main_background,
-      onChange: function onChange(colorValue) {
-        return props.setAttributes({
-          story_lines_main_background: colorValue
+      gradientValue: gradientValue,
+      onGradientChange: setGradient,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'icon-block')
+    }, {
+      colorValue: storyLinesMainBackgroundColor.color || storyLinesMainBackgroundColorValue,
+      onColorChange: function onColorChange(colorValue) {
+        setStoryLinesMainBackgroundColor(colorValue);
+        setAttributes({
+          storyLinesMainBackgroundColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'atomic-blocks')
-    }]
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'atomic-blocks'),
-    initialOpen: false,
-    colorSettings: [{
-      value: props.attributes.story_lines_title_color,
-      onChange: function onChange(colorValue) {
-        return props.setAttributes({
-          story_lines_title_color: colorValue
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Section Background Color', 'icon-block')
+    }, {
+      colorValue: storyLinesTitleColor.color || storyLinesTitleColorValue,
+      onColorChange: function onColorChange(colorValue) {
+        setStoryLinesTitleColor(colorValue);
+        setAttributes({
+          storyLinesTitleColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'atomic-blocks')
-    }]
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Text Color', 'atomic-blocks'),
-    initialOpen: false,
-    colorSettings: [{
-      value: props.attributes.story_lines_main_color,
-      onChange: function onChange(colorValue) {
-        return props.setAttributes({
-          story_lines_main_color: colorValue
+      gradientValue: gradientValue,
+      onGradientChange: setGradient,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'icon-block')
+    }, {
+      colorValue: storyLinesMainColor.color || storyLinesMainColorValue,
+      onColorChange: function onColorChange(colorValue) {
+        setStoryLinesMainColor(colorValue);
+        setAttributes({
+          storyLinesMainColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Text Color', 'atomic-blocks')
-    }]
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Text Color', 'icon-block')
+    }],
+    __experimentalHasMultipleOrigins: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)(), {
     style: divStyle
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
     style: h2Style
   }, props.attributes.story_lines_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("ul", null, highlightDisplay))];
 }
+var storyLinesColorAttributes = {
+  storyLinesTitleBackgroundColor: 'story-lines-title-background-color',
+  storyLinesMainBackgroundColor: 'story-lines-main-background-color',
+  storyLinesTitleColor: 'story-lines-title-color',
+  storyLinesMainColor: 'story-lines-main-color'
+};
+/* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.withColors)(storyLinesColorAttributes)(Edit));
 
 /***/ }),
 
@@ -516,7 +540,7 @@ function _unsupportedIterableToArray(o, minLen) {
   \************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"story-lines/story-lines","version":"0.1.0","title":"Story Lines","category":"widgets","description":"Example block scaffolded with Create Block tool.","attributes":{"story_lines_highlights":{"type":"array","default":[]},"story_lines_title":{"type":"string","default":"Story Lines"},"story_lines_title_background":{"type":"string","default":"#000000"},"story_lines_main_background":{"type":"string","default":"#252525"},"story_lines_title_color":{"type":"string","default":"#FFFFFF"},"story_lines_main_color":{"type":"string","default":"#FFFFFF"}},"supports":{"align":["wide","full"],"html":false,"color":{"gradients":true,"link":true,"__experimentalDefaultControls":{"background":true,"text":true}},"__experimentalLayout":true},"textdomain":"story-lines","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"story-lines/story-lines","version":"0.1.0","title":"Story Lines","category":"widgets","description":"Example block scaffolded with Create Block tool.","attributes":{"story_lines_highlights":{"type":"array","default":[]},"story_lines_title":{"type":"string","default":"Story Lines"},"storyLinesTitleBackgroundColor":{"type":"string","default":"#000000"},"storyLinesMainBackgroundColor":{"type":"string","default":"#252525"},"storyLinesTitleColor":{"type":"string","default":"#FFFFFF"},"storyLinesMainColor":{"type":"string","default":"#FFFFFF"}},"supports":{"align":["wide","full"],"html":false,"color":{"gradients":true,"link":true,"__experimentalDefaultControls":{"background":true,"text":true}},"__experimentalLayout":true},"textdomain":"story-lines","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

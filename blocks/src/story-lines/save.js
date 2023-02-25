@@ -27,7 +27,7 @@ export default function save( props ) {
 	} );
 
 	return (
-		<div { ...blockProps } style={divStyle}>
+		<div { ...useBlockProps.save() } style={divStyle}>
 			<h2 style={h2Style}> { props.attributes.story_lines_title }</h2>
 			<ul>
 				{ highlightDisplay }

@@ -3,6 +3,10 @@ import {
 	useBlockProps,
 	InspectorControls,
 	InnerBlocks,
+	ContrastChecker,
+	withColors,
+	__experimentalPanelColorGradientSettings as PanelColorGradientSettings, // eslint-disable-line
+	__experimentalUseGradient as useGradient, // eslint-disable-line
 } from '@wordpress/block-editor';
 import {
 	Button,
@@ -20,7 +24,7 @@ import {
 import { useSelect } from '@wordpress/data';
 import {
 	PanelColor,
-	Fragment
+	Fragment,
 } from '@wordpress/editor';
 import {
 	useState,
@@ -42,7 +46,28 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( props ) {
+export function Edit( props ) {
+
+	const {
+		attributes,
+		setAttributes,
+		setStoryLinesTitleBackgroundColor,
+		setStoryLinesMainBackgroundColor,
+		setStoryLinesTitleColor,
+		setStoryLinesMainColor,
+		storyLinesMainBackgroundColor,
+		storyLinesTitleBackgroundColor,
+		storyLinesTitleColor,
+		storyLinesMainColor,
+	} = props;
+
+	const {
+		storyLinesMainBackgroundColorValue,
+		storyLinesTitleBackgroundColorValue,
+		storyLinesTitleColorValue,
+		storyLinesMainColorValue,
+	} = attributes;
+	const { gradientClass, gradientValue, setGradient } = useGradient();
 
 	const handleAddLocation = () => {
 		const story_lines_highlights = [ ...props.attributes.story_lines_highlights ];
@@ -87,7 +112,7 @@ export default function Edit( props ) {
 	let highlightFields,
 		highlightDisplay;
 
-	console.log(props.attributes.story_lines_highlights.length);
+	console.log(props.attributes.story_lines_title_background);
 
 	if ( props.attributes.story_lines_highlights.length ) {
 		console.log( 'here' );
@@ -124,12 +149,12 @@ export default function Edit( props ) {
 	console.log(highlightDisplay);
 
 	return [
-		<InspectorControls key="1">
+		<InspectorControls>
 			<PanelBody title={ __( 'Highlights Title' ) }>
 				<TextControl
 					placeholder=""
 					value={ props.attributes.story_lines_title }
-					onChange={ ( story_lines_title ) => props.setAttributes( story_lines_title ) }
+					onChange={ ( titleValue ) => props.setAttributes( { story_lines_title: titleValue } ) }
 				/>
 			</PanelBody>
 			<PanelBody title={ __( 'Highlights' ) }>
@@ -140,46 +165,64 @@ export default function Edit( props ) {
 					{ __( 'Add Highlight' ) }
 				</Button>
 			</PanelBody>
-			<PanelColorSettings
-					title={ __( 'Title Background Color', 'atomic-blocks' ) }
-					initialOpen={ false }
-					colorSettings={ [ {
-						value: props.attributes.story_lines_title_background,
-						onChange: ( colorValue ) => props.setAttributes( { story_lines_title_background: colorValue } ),
-						label: __( 'Title Background Color', 'atomic-blocks' ),
-					} ] }
-				>
-				</PanelColorSettings>
-				<PanelColorSettings
-					title={ __( 'Section Background Color', 'atomic-blocks' ) }
-					initialOpen={ false }
-					colorSettings={ [ {
-						value: props.attributes.story_lines_main_background,
-						onChange: ( colorValue ) => props.setAttributes( { story_lines_main_background: colorValue } ),
-						label: __( 'Title Background Color', 'atomic-blocks' ),
-					} ] }
-				>
-				</PanelColorSettings>
-				<PanelColorSettings
-					title={ __( 'Title Color', 'atomic-blocks' ) }
-					initialOpen={ false }
-					colorSettings={ [ {
-						value: props.attributes.story_lines_title_color,
-						onChange: ( colorValue ) => props.setAttributes( { story_lines_title_color: colorValue } ),
-						label: __( 'Title Color', 'atomic-blocks' ),
-					} ] }
-				>
-				</PanelColorSettings>
-				<PanelColorSettings
-					title={ __( 'Text Color', 'atomic-blocks' ) }
-					initialOpen={ false }
-					colorSettings={ [ {
-						value: props.attributes.story_lines_main_color,
-						onChange: ( colorValue ) => props.setAttributes( { story_lines_main_color: colorValue } ),
-						label: __( 'Text Color', 'atomic-blocks' ),
-					} ] }
-				>
-				</PanelColorSettings>
+			<PanelColorGradientSettings
+				className="outermost-icon-block__color-settings"
+				title={ __( 'Color' ) }
+				initialOpen={ true }
+				enableAlpha={ true }
+				settings={ [
+					{
+						colorValue: storyLinesTitleBackgroundColor.color || storyLinesTitleBackgroundColorValue,
+						onColorChange: ( colorValue ) => {
+							setStoryLinesTitleBackgroundColor( colorValue );
+							setAttributes( {
+								storyLinesTitleBackgroundColorValue: colorValue,
+							} );
+						},
+						gradientValue,
+						onGradientChange: setGradient,
+						label: __( 'Title Background Color', 'icon-block' ),
+					},
+					{
+						colorValue:
+							storyLinesMainBackgroundColor.color ||
+							storyLinesMainBackgroundColorValue,
+						onColorChange: ( colorValue ) => {
+							setStoryLinesMainBackgroundColor( colorValue );
+							setAttributes( {
+								storyLinesMainBackgroundColorValue: colorValue,
+							} );
+						},
+						label: __( 'Section Background Color', 'icon-block' ),
+					},
+					{
+						colorValue: storyLinesTitleColor.color || storyLinesTitleColorValue,
+						onColorChange: ( colorValue ) => {
+							setStoryLinesTitleColor( colorValue );
+							setAttributes( {
+								storyLinesTitleColorValue: colorValue,
+							} );
+						},
+						gradientValue,
+						onGradientChange: setGradient,
+						label: __( 'Title Color', 'icon-block' ),
+					},
+					{
+						colorValue:
+							storyLinesMainColor.color ||
+							storyLinesMainColorValue,
+						onColorChange: ( colorValue ) => {
+							setStoryLinesMainColor( colorValue );
+							setAttributes( {
+								storyLinesMainColorValue: colorValue,
+							} );
+						},
+						label: __( 'Text Color', 'icon-block' ),
+					},
+				] }
+				__experimentalHasMultipleOrigins={ true }
+			>
+			</PanelColorGradientSettings>
 		</InspectorControls>,
 		<div { ...useBlockProps() } style={divStyle}>
 			<h2 style={h2Style}>{ props.attributes.story_lines_title }</h2>
@@ -189,3 +232,12 @@ export default function Edit( props ) {
 		</div>
 	];
 }
+
+const storyLinesColorAttributes = {
+	storyLinesTitleBackgroundColor: 'story-lines-title-background-color',
+	storyLinesMainBackgroundColor: 'story-lines-main-background-color',
+	storyLinesTitleColor: 'story-lines-title-color',
+	storyLinesMainColor: 'story-lines-main-color',
+};
+
+export default withColors( storyLinesColorAttributes )( Edit );
