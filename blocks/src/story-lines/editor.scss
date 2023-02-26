@@ -4,6 +4,28 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-story-lines {
-	border: 1px dotted #f00;
+.wp-block-story-lines-story-lines {
+	position: relative;
+	margin: 10px 0;
+	background-color: #252525;
+	padding-bottom: 5px;
+
+	& h2 {
+		color: #fff;
+		background-color: #000;
+		font-family: Roboto, sans-serif;
+		font-weight: 300;
+		font-size: 24px;
+		margin: 0 0 15px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	& ul {
+		padding: 0 2rem;
+
+		& li {
+			color: #fff;
+		}
+	}
 }

@@ -1,5 +1,4 @@
 /******/ (function() { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/story-lines/edit.js":
@@ -8,11 +7,12 @@
   \*********************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Edit": function() { return /* binding */ Edit; }
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
@@ -26,7 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/story-lines/editor.scss");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editor.scss */ "./src/story-lines/editor.scss");
+
 
 
 
@@ -54,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function Edit(props) {
+  var _classnames, _classnames2, _classnames3;
   var attributes = props.attributes,
     setAttributes = props.setAttributes,
     setStoryLinesTitleBackgroundColor = props.setStoryLinesTitleBackgroundColor,
@@ -113,8 +117,28 @@ function Edit(props) {
   var liStyle = {
     color: props.attributes.story_lines_main_color
   };
+  var storyLinesMainBackgroundClasses = classnames__WEBPACK_IMPORTED_MODULE_8___default()('story-lines-main', (_classnames = {
+    'has-background-gradient': gradientValue
+  }, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames, gradientClass, gradientClass), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames, 'has-slider-background-color', storyLinesMainBackgroundColor.color || storyLinesMainBackgroundColorValue || gradientValue), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames, "has-".concat(storyLinesMainBackgroundColor.slug, "-background-color"), storyLinesMainBackgroundColor.slug), _classnames));
+  var storyLinesMainBackgroundStyles = {
+    background: gradientValue,
+    backgroundColor: storyLinesMainBackgroundColorValue
+  };
+  var storyLinesTitleClasses = classnames__WEBPACK_IMPORTED_MODULE_8___default()('story-lines-title', (_classnames2 = {
+    'has-background-gradient': gradientValue
+  }, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, gradientClass, gradientClass), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, 'has-slider-background-color', storyLinesTitleBackgroundColor.color || storyLinesTitleBackgroundColorValue || gradientValue), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, "has-".concat(storyLinesTitleBackgroundColor.slug, "-background-color"), storyLinesTitleBackgroundColor.slug), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, 'has-gradient', gradientValue), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, gradientClass, gradientClass), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, 'has-slider-color', storyLinesTitleColor.color || storyLinesTitleColorValue || gradientValue), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, "has-".concat(storyLinesTitleColor.slug, "-color"), storyLinesTitleColor.slug), _classnames2));
+  var storyLinesTitleStyles = {
+    color: storyLinesTitleColorValue,
+    background: gradientValue,
+    backgroundColor: storyLinesTitleBackgroundColorValue
+  };
+  var storyLinesMainClasses = classnames__WEBPACK_IMPORTED_MODULE_8___default()('story-lines-links', (_classnames3 = {
+    'has-gradient': gradientValue
+  }, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames3, gradientClass, gradientClass), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames3, 'has-slider-color', storyLinesMainColor.color || storyLinesMainColorValue || gradientValue), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames3, "has-".concat(storyLinesMainColor.slug, "-color"), storyLinesMainColor.slug), _classnames3));
+  var storyLinesMainStyles = {
+    color: storyLinesMainColorValue
+  };
   var highlightFields, highlightDisplay;
-  console.log(props.attributes.story_lines_title_background);
   if (props.attributes.story_lines_highlights.length) {
     console.log('here');
     highlightFields = props.attributes.story_lines_highlights.map(function (location, index) {
@@ -148,10 +172,11 @@ function Edit(props) {
     highlightDisplay = props.attributes.story_lines_highlights.map(function (highlight, index) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("li", {
         key: index,
-        style: liStyle
+        className: storyLinesMainClasses,
+        style: storyLinesMainStyles
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
         href: '#' + highlight.target,
-        style: liStyle
+        style: storyLinesMainStyles
       }, highlight.text));
     });
   }
@@ -185,7 +210,7 @@ function Edit(props) {
       },
       gradientValue: gradientValue,
       onGradientChange: setGradient,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'icon-block')
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Background Color', 'story-lines')
     }, {
       colorValue: storyLinesMainBackgroundColor.color || storyLinesMainBackgroundColorValue,
       onColorChange: function onColorChange(colorValue) {
@@ -194,7 +219,7 @@ function Edit(props) {
           storyLinesMainBackgroundColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Section Background Color', 'icon-block')
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Section Background Color', 'story-lines')
     }, {
       colorValue: storyLinesTitleColor.color || storyLinesTitleColorValue,
       onColorChange: function onColorChange(colorValue) {
@@ -205,7 +230,7 @@ function Edit(props) {
       },
       gradientValue: gradientValue,
       onGradientChange: setGradient,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'icon-block')
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'story-lines')
     }, {
       colorValue: storyLinesMainColor.color || storyLinesMainColorValue,
       onColorChange: function onColorChange(colorValue) {
@@ -214,13 +239,15 @@ function Edit(props) {
           storyLinesMainColorValue: colorValue
         });
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Text Color', 'icon-block')
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Text Color', 'story-lines')
     }],
     __experimentalHasMultipleOrigins: true
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)(), {
-    style: divStyle
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
+    'className': storyLinesMainBackgroundClasses,
+    'style': storyLinesMainBackgroundStyles
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-    style: h2Style
+    className: storyLinesTitleClasses,
+    style: storyLinesTitleStyles
   }, props.attributes.story_lines_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("ul", null, highlightDisplay))];
 }
 var storyLinesColorAttributes = {
@@ -239,6 +266,7 @@ var storyLinesColorAttributes = {
   \**********************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
@@ -246,7 +274,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/story-lines/style.scss");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/story-lines/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/story-lines/block.json");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/story-lines/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/story-lines/block.json");
 
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
@@ -270,16 +299,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   /**
    * @see ./edit.js
    */
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
   icon: {
     src: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       "enable-background": "new 0 0 256 256",
@@ -298,12 +329,177 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/story-lines/save.js":
+/*!*********************************!*\
+  !*** ./src/story-lines/save.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ save; }
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+function save(props) {
+  var _classnames2;
+  var attributes = props.attributes;
+  var storyLinesMainBackgroundColor = attributes.storyLinesMainBackgroundColor,
+    storyLinesTitleBackgroundColor = attributes.storyLinesTitleBackgroundColor,
+    storyLinesTitleColor = attributes.storyLinesTitleColor,
+    storyLinesMainColor = attributes.storyLinesMainColor,
+    storyLinesMainBackgroundColorValue = attributes.storyLinesMainBackgroundColorValue,
+    storyLinesTitleBackgroundColorValue = attributes.storyLinesTitleBackgroundColorValue,
+    storyLinesTitleColorValue = attributes.storyLinesTitleColorValue,
+    storyLinesMainColorValue = attributes.storyLinesMainColorValue,
+    gradient = attributes.gradient,
+    customGradient = attributes.customGradient;
+  var divStyle = {
+    backgroundColor: props.attributes.story_lines_main_background
+  };
+  var h2Style = {
+    backgroundColor: props.attributes.story_lines_title_background,
+    color: props.attributes.story_lines_title_color
+  };
+  var liStyle = {
+    color: props.attributes.story_lines_main_color
+  };
+  var storyLinesMainBackgroundClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('story-lines-main', (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    'has-slider-background-color': storyLinesMainBackgroundColor.color || storyLinesMainBackgroundColorValue || gradient || customGradient
+  }, "has-".concat(storyLinesMainBackgroundColor.slug, "-background-color"), storyLinesMainBackgroundColor.slug));
+  var storyLinesMainBackgroundStyles = {
+    background: !gradient ? customGradient : undefined,
+    backgroundColor: storyLinesMainBackgroundColorValue
+  };
+  var storyLinesTitleClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('story-lines-title', (_classnames2 = {
+    'has-slider-background-color': storyLinesTitleBackgroundColor.color || storyLinesTitleBackgroundColorValue || gradient || customGradient
+  }, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, "has-".concat(storyLinesTitleBackgroundColor.slug, "-background-color"), storyLinesTitleBackgroundColor.slug), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, 'has-slider-color', storyLinesTitleColor.color || storyLinesTitleColorValue || gradient || customGradient), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_classnames2, "has-".concat(storyLinesTitleColor.slug, "-color"), storyLinesTitleColor.slug), _classnames2));
+  var storyLinesTitleStyles = {
+    color: storyLinesTitleColorValue,
+    background: !gradient ? customGradient : undefined,
+    backgroundColor: storyLinesTitleBackgroundColorValue
+  };
+  var storyLinesMainClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('story-lines-links', (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    'has-slider-color': storyLinesMainColor.color || storyLinesMainColorValue || gradient || customGradient
+  }, "has-".concat(storyLinesMainColor.slug, "-color"), storyLinesMainColor.slug));
+  var storyLinesMainStyles = {
+    color: storyLinesMainColorValue
+  };
+  var highlightDisplay = props.attributes.story_lines_highlights.map(function (highlight, index) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("li", {
+      key: index,
+      className: storyLinesMainClasses,
+      style: storyLinesMainStyles
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+      href: '#' + highlight.target,
+      className: storyLinesMainClasses,
+      style: storyLinesMainStyles
+    }, highlight.text));
+  });
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps.save({
+    'className': storyLinesMainBackgroundClasses,
+    'style': storyLinesMainBackgroundStyles
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", {
+    className: storyLinesTitleClasses,
+    style: storyLinesTitleStyles
+  }, " ", props.attributes.story_lines_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("ul", null, highlightDisplay));
+}
+
+/***/ }),
+
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/***/ (function(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+	var nativeCodeString = '[native code]';
+
+	function classNames() {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				if (arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
+				}
+			} else if (argType === 'object') {
+				if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
+					classes.push(arg.toString());
+					continue;
+				}
+
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
 /***/ "./src/story-lines/editor.scss":
 /*!*************************************!*\
   !*** ./src/story-lines/editor.scss ***!
   \*************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -316,6 +512,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -328,6 +525,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["blockEditor"];
 
 /***/ }),
@@ -338,6 +536,7 @@ module.exports = window["wp"]["blockEditor"];
   \********************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["blocks"];
 
 /***/ }),
@@ -348,6 +547,7 @@ module.exports = window["wp"]["blocks"];
   \************************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["components"];
 
 /***/ }),
@@ -358,6 +558,7 @@ module.exports = window["wp"]["components"];
   \******************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["data"];
 
 /***/ }),
@@ -368,6 +569,7 @@ module.exports = window["wp"]["data"];
   \********************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["editor"];
 
 /***/ }),
@@ -378,6 +580,7 @@ module.exports = window["wp"]["editor"];
   \*********************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["element"];
 
 /***/ }),
@@ -388,6 +591,7 @@ module.exports = window["wp"]["element"];
   \******************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = window["wp"]["i18n"];
 
 /***/ }),
@@ -398,6 +602,7 @@ module.exports = window["wp"]["i18n"];
   \*********************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _arrayLikeToArray; }
@@ -416,6 +621,7 @@ function _arrayLikeToArray(arr, len) {
   \**********************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _arrayWithoutHoles; }
@@ -428,29 +634,32 @@ function _arrayWithoutHoles(arr) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ _extends; }
+/* harmony export */   "default": function() { return /* binding */ _defineProperty; }
 /* harmony export */ });
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends.apply(this, arguments);
+/* harmony import */ var _toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toPropertyKey.js */ "./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js");
+
+function _defineProperty(obj, key, value) {
+  key = (0,_toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__["default"])(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
 }
 
 /***/ }),
@@ -461,6 +670,7 @@ function _extends() {
   \********************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _iterableToArray; }
@@ -477,6 +687,7 @@ function _iterableToArray(iter) {
   \**********************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _nonIterableSpread; }
@@ -493,6 +704,7 @@ function _nonIterableSpread() {
   \**********************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _toConsumableArray; }
@@ -511,12 +723,84 @@ function _toConsumableArray(arr) {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/toPrimitive.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ _toPrimitive; }
+/* harmony export */ });
+/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
+
+function _toPrimitive(input, hint) {
+  if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ _toPropertyKey; }
+/* harmony export */ });
+/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
+/* harmony import */ var _toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toPrimitive.js */ "./node_modules/@babel/runtime/helpers/esm/toPrimitive.js");
+
+
+function _toPropertyKey(arg) {
+  var key = (0,_toPrimitive_js__WEBPACK_IMPORTED_MODULE_1__["default"])(arg, "string");
+  return (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__["default"])(key) === "symbol" ? key : String(key);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/typeof.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/typeof.js ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ _typeof; }
+/* harmony export */ });
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js":
 /*!*******************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
   \*******************************************************************************/
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ _unsupportedIterableToArray; }
@@ -540,6 +824,7 @@ function _unsupportedIterableToArray(o, minLen) {
   \************************************/
 /***/ (function(module) {
 
+"use strict";
 module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"story-lines/story-lines","version":"0.1.0","title":"Story Lines","category":"widgets","description":"Example block scaffolded with Create Block tool.","attributes":{"story_lines_highlights":{"type":"array","default":[]},"story_lines_title":{"type":"string","default":"Story Lines"},"storyLinesTitleBackgroundColor":{"type":"string","default":"#000000"},"storyLinesMainBackgroundColor":{"type":"string","default":"#252525"},"storyLinesTitleColor":{"type":"string","default":"#FFFFFF"},"storyLinesMainColor":{"type":"string","default":"#FFFFFF"}},"supports":{"align":["wide","full"],"html":false,"color":{"gradients":true,"link":true,"__experimentalDefaultControls":{"background":true,"text":true}},"__experimentalLayout":true},"textdomain":"story-lines","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })

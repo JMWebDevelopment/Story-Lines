@@ -18,6 +18,7 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
+import Save from './save';
 import metadata from './block.json';
 
 /**
@@ -30,6 +31,7 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
+	save: Save,
 	icon: {
 		src: <svg enable-background="new 0 0 256 256" height="256" viewBox="0 0 256 256" width="256" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink"><image height="256" width="256" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 		AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAZ

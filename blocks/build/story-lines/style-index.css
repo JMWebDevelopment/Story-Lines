@@ -7,10 +7,27 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-story-lines {
-  background-color: #21759b;
+.wp-block-story-lines-story-lines {
+  position: relative;
+  margin: 10px 0;
+  background-color: #252525;
+  padding-bottom: 5px;
+}
+.wp-block-story-lines-story-lines h2 {
   color: #fff;
-  padding: 2px;
+  background-color: #000;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  margin: 0 0 15px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.wp-block-story-lines-story-lines ul {
+  padding: 0 2rem;
+}
+.wp-block-story-lines-story-lines ul li {
+  color: #fff;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

@@ -29,6 +29,7 @@ import {
 import {
 	useState,
 } from '@wordpress/element';
+import classnames from 'classnames';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -109,10 +110,60 @@ export function Edit( props ) {
 		color: props.attributes.story_lines_main_color,
 	};
 
+	const storyLinesMainBackgroundClasses = classnames( 'story-lines-main', {
+		'has-background-gradient': gradientValue,
+		[ gradientClass ]: gradientClass,
+		'has-slider-background-color':
+			storyLinesMainBackgroundColor.color ||
+			storyLinesMainBackgroundColorValue ||
+			gradientValue,
+		[ `has-${ storyLinesMainBackgroundColor.slug }-background-color` ]: storyLinesMainBackgroundColor.slug,
+	} );
+
+	const storyLinesMainBackgroundStyles = {
+		background: gradientValue,
+		backgroundColor: storyLinesMainBackgroundColorValue,
+	};
+
+	const storyLinesTitleClasses = classnames( 'story-lines-title', {
+		'has-background-gradient': gradientValue,
+		[ gradientClass ]: gradientClass,
+		'has-slider-background-color':
+			storyLinesTitleBackgroundColor.color ||
+			storyLinesTitleBackgroundColorValue ||
+			gradientValue,
+		[ `has-${ storyLinesTitleBackgroundColor.slug }-background-color` ]: storyLinesTitleBackgroundColor.slug,
+		'has-gradient': gradientValue,
+		[ gradientClass ]: gradientClass,
+		'has-slider-color':
+			storyLinesTitleColor.color ||
+			storyLinesTitleColorValue ||
+			gradientValue,
+		[ `has-${ storyLinesTitleColor.slug }-color` ]: storyLinesTitleColor.slug,
+	} );
+
+	const storyLinesTitleStyles = {
+		color: storyLinesTitleColorValue,
+		background: gradientValue,
+		backgroundColor: storyLinesTitleBackgroundColorValue,
+	};
+
+	const storyLinesMainClasses = classnames( 'story-lines-links', {
+		'has-gradient': gradientValue,
+		[ gradientClass ]: gradientClass,
+		'has-slider-color':
+			storyLinesMainColor.color ||
+			storyLinesMainColorValue ||
+			gradientValue,
+		[ `has-${ storyLinesMainColor.slug }-color` ]: storyLinesMainColor.slug,
+	} );
+
+	const storyLinesMainStyles = {
+		color: storyLinesMainColorValue,
+	};
+
 	let highlightFields,
 		highlightDisplay;
-
-	console.log(props.attributes.story_lines_title_background);
 
 	if ( props.attributes.story_lines_highlights.length ) {
 		console.log( 'here' );
@@ -142,7 +193,7 @@ export function Edit( props ) {
 		} );
 
 		highlightDisplay = props.attributes.story_lines_highlights.map( ( highlight, index ) => {
-			return <li key={ index } style={liStyle}><a href={ '#' + highlight.target } style={liStyle}>{ highlight.text }</a></li>;
+			return <li key={ index } className={ storyLinesMainClasses } style={ storyLinesMainStyles }><a href={ '#' + highlight.target } style={ storyLinesMainStyles }>{ highlight.text }</a></li>;
 		} );
 	}
 
@@ -181,7 +232,7 @@ export function Edit( props ) {
 						},
 						gradientValue,
 						onGradientChange: setGradient,
-						label: __( 'Title Background Color', 'icon-block' ),
+						label: __( 'Title Background Color', 'story-lines' ),
 					},
 					{
 						colorValue:
@@ -193,7 +244,7 @@ export function Edit( props ) {
 								storyLinesMainBackgroundColorValue: colorValue,
 							} );
 						},
-						label: __( 'Section Background Color', 'icon-block' ),
+						label: __( 'Section Background Color', 'story-lines' ),
 					},
 					{
 						colorValue: storyLinesTitleColor.color || storyLinesTitleColorValue,
@@ -205,7 +256,7 @@ export function Edit( props ) {
 						},
 						gradientValue,
 						onGradientChange: setGradient,
-						label: __( 'Title Color', 'icon-block' ),
+						label: __( 'Title Color', 'story-lines' ),
 					},
 					{
 						colorValue:
@@ -217,15 +268,18 @@ export function Edit( props ) {
 								storyLinesMainColorValue: colorValue,
 							} );
 						},
-						label: __( 'Text Color', 'icon-block' ),
+						label: __( 'Text Color', 'story-lines' ),
 					},
 				] }
 				__experimentalHasMultipleOrigins={ true }
 			>
 			</PanelColorGradientSettings>
 		</InspectorControls>,
-		<div { ...useBlockProps() } style={divStyle}>
-			<h2 style={h2Style}>{ props.attributes.story_lines_title }</h2>
+		<div { ...useBlockProps( {
+			'className': storyLinesMainBackgroundClasses,
+			'style': storyLinesMainBackgroundStyles
+		} ) }>
+			<h2 className={ storyLinesTitleClasses } style={ storyLinesTitleStyles }>{ props.attributes.story_lines_title }</h2>
 			<ul>
 				{ highlightDisplay }
 			</ul>
