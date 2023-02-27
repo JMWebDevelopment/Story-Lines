@@ -3,7 +3,7 @@
  * Plugin Name:       Story Lines
  * Plugin URI:        http://www.jacobmartella.com/wordpress/wordpress-plugins/story-lines
  * Description:       Add a list of story highlights at the top of your posts to let your readers really know what your story is all about.
- * Version:           2.0
+ * Version:           2.1
  * Author:            Jacob Martella Web Development
  * Author URI:        https://jacobmartella.com
  * Text Domain:       story-lines

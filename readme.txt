@@ -1,10 +1,10 @@
 === Story Lines ===
 Contributors: ArenaPigskin
 Tags: story lines, story highlights, shortcodes, custom meta panel
-Requires at least: 4.0
-Tested up to: 5.7.2
+Requires at least: 5.9
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -23,6 +23,10 @@ One of the common features of online news stories is a section that displays two
 2. The Story Lines section of the post editor.
 
 == Changelog ==
+= 2.1 =
+- Updated the block to use the latest block-creating features.
+- Fixed issue with not being able to edit the block title.
+
 = 2.0 =
 - Refactor the entire plugin to use an object-oriented programming paradigm.
 - Upped the lowest PHP version supported to 7.0.

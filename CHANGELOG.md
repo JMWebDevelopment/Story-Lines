@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1
+- Updated the block to use the latest block-creating features.
+- Fixed issue with not being able to edit the block title.
+
 ## 2.0
 - Refactor the entire plugin to use an object-oriented programming paradigm.
 - Upped the lowest PHP version supported to 7.0.
