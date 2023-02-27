@@ -65,13 +65,14 @@ class Story_Lines {
 	public function __construct() {
 
 		$this->plugin_slug = 'story-lines';
-		$this->version     = '2.0';
+		$this->version     = '2.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_setup_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_block_hooks();
 
 	}
 
@@ -87,6 +88,7 @@ class Story_Lines {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-story-lines-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-story-lines-public.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-story-lines-database-updates.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'blocks/class-story-lines-blocks.php';
 
 		require_once plugin_dir_path( __FILE__ ) . 'class-story-lines-loader.php';
 		$this->loader = new Story_Lines_Loader();
@@ -129,7 +131,6 @@ class Story_Lines {
 		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $admin, 'meta_box_save' );
 		$this->loader->add_action( 'init', $admin, 'story_lines_buttons' );
-		$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
 	}
 
 	/**
@@ -142,6 +143,16 @@ class Story_Lines {
 		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_styles' );
 		$this->loader->add_action( 'init', $public, 'register_shortcode' );
 		$this->loader->add_action( 'widgets_init', $public, 'register_widget' );
+	}
+
+	/**
+	 * Runs all of the admin hooks for the plugin.
+	 *
+	 * @since 2.1.0
+	 */
+	private function define_block_hooks() {
+		$blocks = new Story_Lines_Blocks( $this->get_version() );
+		$this->loader->add_action( 'init', $blocks, 'create_blocks' );
 	}
 
 	/**
